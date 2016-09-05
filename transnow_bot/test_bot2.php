@@ -22,7 +22,8 @@ for ($i = 0; $i<=4; $i++) {
     $trans[$i] = $data->def[0]->tr[$i]->text;
 }
 $transfiltered = array_filter ($trans);
-$reply = 'The word "'.$message.'" translates like: '.implode(', ', $transfiltered).'.';
+$reply = 'The word "'.$message.'" translates like: '$transfiltered[0]'.';
+//$reply = 'The word "'.$message.'" translates like: '.implode(', ', $transfiltered).'.';
 file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($reply));
 echo $reply;
 exit();
