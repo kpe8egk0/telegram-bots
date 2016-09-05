@@ -53,7 +53,7 @@ function getArticleFromSource($source, $lang, $input_text, $key)
     return $json_data;
 }
 
-$message = 'мяч';
+$message = 'dd';
 $lang = 'ru-en';
 
 //Попытка получить статью из БД
