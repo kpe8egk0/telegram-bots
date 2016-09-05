@@ -25,6 +25,8 @@ function db()
 function addArticle($input_text, $article, $lang_type_code)
 {
     $db = db();
+    $encode = $db->prepare('SET NAMES "utf8"');
+    $encode->execute();
     $stmt = $db->prepare('INSERT INTO article (input_text, article, lang_type_code) VALUES (:input_text, :article, :lang_type_code)');
     $stmt->bindParam(':input_text', $input_text);
     $stmt->bindParam(':article', $article);
