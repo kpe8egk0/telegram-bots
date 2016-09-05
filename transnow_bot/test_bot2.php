@@ -16,25 +16,13 @@ $username = $output['message']['from']['username'];
 
 $lang = 'ru-en';
 
-sendMessage($chat_id, $message);
-$article_from_source = getArticleFromSource($source, $lang, $message, $yandex_key);
-sendMessage($chat_id, $article_from_source);
+$url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang='.$lang.'&text='.$text, $key);
+$data = json_decode(file_get_contents($url));
+for ($i = 0; $i<=4; $i++) {
+    $trans[$i] = $data->def[0]->tr[$i]->text;
+}
+$transfiltered = array_filter ($trans);
+$reply = 'The word "'.$text.'" translates like: '.implode(', ', $transfiltered).'.';
+file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($reply));
+echo $reply;
 exit();
-
-function sendMessage($chat_id, $message)
-{
-    file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message));
-}
-
-function getArticleFromSource($source, $lang, $input_text, $key)
-{
-    $url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang='.$langs.'&text='.$text, $key);
- $data = file_get_contents($url);
-    //   $data = json_decode(file_get_contents($url));
-    for ($i = 0; $i<=4; $i++) {
-        $trans[$i] = $data->def[0]->tr[$i]->text;
-    }
-    $transfiltered = array_filter ($trans);
-    $json_data = 'The word "'.$text.'" translates like: '.implode(', ', $transfiltered).'.';
-    return $json_data;
-}
