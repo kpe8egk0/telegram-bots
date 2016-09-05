@@ -13,10 +13,9 @@ $output = json_decode($input_json, TRUE);
 $chat_id = $output['message']['chat']['id'];
 $message = $output['message']['text'];
 $username = $output['message']['from']['username'];
-
 $lang = 'ru-en';
 
-$url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang='.$lang.'&text='.$message, $key);
+$url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang=%s&text=%s', $key, $lang, $message);
 $data = json_decode(file_get_contents($url));
 for ($i = 0; $i<=4; $i++) {
     $trans[$i] = $data->def[0]->tr[$i]->text;
