@@ -36,7 +36,7 @@ function getArticleFromDB($source, $lang, $input_text)
     $stmt->bindParam(':input_text', $input_text);
     $stmt->bindParam(':lang', $lang);
     $stmt->execute();
-    echo $stmt->rowCount();
+    echo $stmt->rowCount() . '<br/>';
     $row = $stmt->fetch();
 
 
@@ -69,5 +69,5 @@ if ($article_from_db != NULL) {
     $article_from_source = getArticleFromSource($source, $lang, $message, $yandex_key);
     echo 'pass 2';
     echo '<br/>';
-    echo json_encode($article_from_source, JSON_PRETTY_PRINT);
+    echo $article_from_source->def[0]->tr[0]->text;
 }
