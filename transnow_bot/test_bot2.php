@@ -29,7 +29,8 @@ function sendMessage($chat_id, $message)
 function getArticleFromSource($source, $lang, $input_text, $key)
 {
     $url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang='.$langs.'&text='.$text, $key);
-    $data = json_decode(file_get_contents($url));
+ $data = file_get_contents($url);
+    //   $data = json_decode(file_get_contents($url));
     for ($i = 0; $i<=4; $i++) {
         $trans[$i] = $data->def[0]->tr[$i]->text;
     }
