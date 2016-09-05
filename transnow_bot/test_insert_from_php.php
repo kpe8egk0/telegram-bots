@@ -22,8 +22,7 @@ function addArticle($input_text, $article, $lang_type_code)
     mysql_query("SET NAMES 'utf8'");
     $stmt->execute();
 }
-$message = 'тестовая запись из php';
-$input_text = mb_convert_encoding($message, "UTF-8");
+$input_text = 'тестовая запись из php';
 $article = 'hat';
 $lang_type_code = 'ru-en';
 addArticle($input_text, $article, $lang_type_code);
