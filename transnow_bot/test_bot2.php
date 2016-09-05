@@ -17,12 +17,13 @@ $username = $output['message']['from']['username'];
 $lang = 'ru-en';
 
 $url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang='.$lang.'&text='.$message, $key);
-$data = json_decode(file_get_contents($url));
+$data = file_get_contents($url);
+//$data = json_decode(file_get_contents($url));
 for ($i = 0; $i<=4; $i++) {
     $trans[$i] = $data->def[0]->tr[$i]->text;
 }
 $transfiltered = array_filter ($trans);
-$reply = 'The word "'.$message.'" translates like: '.implode(', ', $transfiltered).'. The translated array lenght is '.count($transfiltered).'.';
+$reply = 'The word "'.$message.'" translates like: '.implode(', ', $transfiltered).'. The translated array length is '.count($transfiltered).'.';
 file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($reply));
 echo $reply;
 exit();
