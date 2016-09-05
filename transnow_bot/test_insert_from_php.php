@@ -22,7 +22,7 @@ function addArticle($input_text, $article, $lang_type_code)
     $stmt->execute();
 }
 $message = 'тестовая запись из php';
-$input_text = $message;
+$input_text = mb_convert_encoding($message, "UTF-8")
 $article = 'hat';
 $lang_type_code = 'ru-en';
 addArticle($input_text, $article, $lang_type_code);
