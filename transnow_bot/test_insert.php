@@ -16,7 +16,7 @@ function db()
 function addArticle($input_text, $article, $lang_type_code)
 {
     $db = db();
-    $stmt = $db->prepare('INSERT INTO article (input_text, article, lang_type_code) VALUES (:input_text, :username, :lang_type_code)');
+    $stmt = $db->prepare('INSERT INTO article (input_text, article, lang_type_code) VALUES (:input_text, :article, :lang_type_code)');
     $stmt->bindParam(':input_text', $input_text);
     $stmt->bindParam(':article', $article);
     $stmt->bindParam(':lang_type_code', $lang_type_code);
