@@ -16,8 +16,8 @@ $username = $output['message']['from']['username'];
 
 $lang = 'ru-en';
 
-//sendMessage($chat_id); без принудительной кодировки не работает
-sendMessage($chat_id, mb_convert_encoding($message, "UTF-8"));
+sendMessage($chat_id, $message);
+// sendMessage($chat_id, mb_convert_encoding($message, "UTF-8"));
 
 exit();
 
