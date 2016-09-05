@@ -1,5 +1,15 @@
 <?php
 
+$access_token = '261062241:AAHYU1rMeyMW4I0z6bxrwP3HpeaJKLVNXxs';
+$api = 'https://api.telegram.org/bot' . $access_token;
+
+$input_json = file_get_contents('php://input');
+$output = json_decode($input_json, TRUE);
+
+$chat_id = $output['message']['chat']['id'];
+$message = $output['message']['text'];
+$username = $output['message']['from']['first_name'].' '.$output['message']['from']['last_name'];
+
 function db()
 {
     define('DB_HOST', getenv('OPENSHIFT_MYSQL_DB_HOST'));
@@ -22,7 +32,7 @@ function addArticle($input_text, $article, $lang_type_code)
     $stmt->execute();
 }
 
-$input_text = 'шляпа 2';
+$input_text = $message;
 $article = 'hat';
 $lang_type_code = 'ru-en';
 addArticle($input_text, $article, $lang_type_code);
