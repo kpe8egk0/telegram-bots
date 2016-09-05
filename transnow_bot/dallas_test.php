@@ -53,7 +53,7 @@ function getArticleFromSource($source, $lang, $input_text, $key)
     return $json_data;
 }
 
-$message = 'яя';
+$message = 'мяч';
 $lang = 'ru-en';
 
 //Попытка получить статью из БД
@@ -69,6 +69,5 @@ if ($article_from_db != NULL) {
     $article_from_source = getArticleFromSource($source, $lang, $message, $yandex_key);
     echo 'pass 2';
     echo '<br/>';
-    echo $article_from_db;
+    echo $article_from_source;
 }
-echo $message;
