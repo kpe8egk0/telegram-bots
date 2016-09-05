@@ -22,7 +22,7 @@ function addArticle($input_text, $article, $lang_type_code)
     $stmt->execute();
 }
 
-$input_text = 'шляпа';
+$input_text = 'шляпа 2';
 $article = 'hat';
 $lang_type_code = 'ru-en';
 addArticle($input_text, $article, $lang_type_code);
