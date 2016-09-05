@@ -1,10 +1,6 @@
 <?php
 // https://api.telegram.org/bot261062241:AAHYU1rMeyMW4I0z6bxrwP3HpeaJKLVNXxs/setWebhook?url=https://transnow-ironyman.rhcloud.com/transnow_bot/test_bot2.php
-$trans[0] = 'trans0';
-$trans[1] = 'trans1';
-$trans[2] = 'trans2';
-$trans[3] = 'trans3';
-$trans[4] = 'trans4';
+$trans = array();
 $source = 'yandex';
 $yandex_key = 'dict.1.1.20160819T080857Z.a21f9f5c92e0e7b9.ab24906e2b9b24a62bede201ca3067abadaf5752';
 
@@ -19,7 +15,7 @@ $message = $output['message']['text'];
 $username = $output['message']['from']['username'];
 $lang = 'ru-en';
 
-$url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang=%s&text=%s', $key, $lang, $message);
+$url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang=%s&text=%s', $key, $lang, mb_convert_encoding($message, "UTF-8"));
 $data = json_decode(file_get_contents($url));
 for ($i = 0; $i<=4; $i++) {
     $trans[$i] = $data->def[0]->tr[$i]->text;
