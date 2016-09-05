@@ -19,6 +19,7 @@ function addArticle($input_text, $article, $lang_type_code)
     $stmt->bindParam(':input_text', $input_text);
     $stmt->bindParam(':article', $article);
     $stmt->bindParam(':lang_type_code', $lang_type_code);
+    mysql_query("SET NAMES 'utf8'");
     $stmt->execute();
 }
 $message = 'тестовая запись из php';
