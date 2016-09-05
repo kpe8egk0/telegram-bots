@@ -49,7 +49,7 @@ function getArticleFromDB($source, $lang, $input_text)
 function getArticleFromSource($source, $lang, $input_text, $key)
 {
     $url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang=%s&text=%s', $key, $lang, $input_text);
-    $json_data = file_get_contents($url);
+    $json_data = file_get_contents($url, TRUE);
     return $json_data;
 }
 
@@ -69,5 +69,5 @@ if ($article_from_db != NULL) {
     $article_from_source = getArticleFromSource($source, $lang, $message, $yandex_key);
     echo 'pass 2';
     echo '<br/>';
-    echo $article_from_source->def[0]->tr[0]->text;
+    var_dump($article_from_source);
 }
