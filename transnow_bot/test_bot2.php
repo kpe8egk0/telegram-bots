@@ -11,14 +11,7 @@ $input_json = file_get_contents('php://input');
 $output = json_decode($input_json, TRUE);
 
 $chat_id = $output['message']['chat']['id'];
-if (empty($_GET["message-get"]));
-{
-    $message = $output['message']['text'];
-}
-else
-{
-    $message = $_GET["message-get"];
-}
+$message = $output['message']['text'];
 $username = $output['message']['from']['username'];
 
 $lang = 'ru-en';
