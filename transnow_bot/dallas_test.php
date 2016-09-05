@@ -64,10 +64,10 @@ if ($article_from_db != NULL) {
     echo '<br/>';
     echo $article_from_db;
 } else {
-    // Если не получена статья из БД
+    // Если не получена  статья из БД
     // Попытка получить статью из внешнего источника
     $article_from_source = getArticleFromSource($source, $lang, $message, $yandex_key);
     echo 'pass 2';
     echo '<br/>';
-    echo $article_from_source;
+    echo json_encode($article_from_source, JSON_PRETTY_PRINT);
 }
