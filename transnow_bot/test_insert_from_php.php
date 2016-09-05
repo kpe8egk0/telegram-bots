@@ -21,7 +21,7 @@ function addArticle($input_text, $article, $lang_type_code)
     $stmt->bindParam(':lang_type_code', $lang_type_code);
     $stmt->execute();
 }
-$message = 'тест';
+$message = 'тестовая запись из php';
 $input_text = $message;
 $article = 'hat';
 $lang_type_code = 'ru-en';
