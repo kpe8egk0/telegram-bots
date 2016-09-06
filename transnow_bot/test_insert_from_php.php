@@ -7,7 +7,7 @@ function db()
     define('DB_USER', getenv('OPENSHIFT_MYSQL_DB_USERNAME'));
     define('DB_PASS', getenv('OPENSHIFT_MYSQL_DB_PASSWORD'));
     define('DB_NAME', getenv('OPENSHIFT_GEAR_NAME'));
-    $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST . ';port=' . DB_PORT;
+    $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST . ';port=' . DB_PORT . ';charset:utf8';
     $dbh = new PDO($dsn, DB_USER, DB_PASS);
     return $dbh;
 }
@@ -15,15 +15,15 @@ function db()
 function addArticle($input_text, $article, $lang_type_code)
 {
     $db = db();
-    $encode = $db->prepare('SET NAMES "utf8"');
-    $encode->execute();
+    //$encode = $db->prepare('SET NAMES "utf8"');
+    //$encode->execute();
     $stmt = $db->prepare('INSERT INTO article (input_text, article, lang_type_code) VALUES (:input_text, :article, :lang_type_code)');
     $stmt->bindParam(':input_text', $input_text);
     $stmt->bindParam(':article', $article);
     $stmt->bindParam(':lang_type_code', $lang_type_code);
     $stmt->execute();
 }
-$input_text = 'тестовая запись из php';
+$input_text = 'тестовая запись из php 2';
 $article = 'hat';
 $lang_type_code = 'ru-en';
 addArticle($input_text, $article, $lang_type_code);
