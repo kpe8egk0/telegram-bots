@@ -7,7 +7,7 @@ function db()
     define('DB_USER', getenv('OPENSHIFT_MYSQL_DB_USERNAME'));
     define('DB_PASS', getenv('OPENSHIFT_MYSQL_DB_PASSWORD'));
     define('DB_NAME', getenv('OPENSHIFT_GEAR_NAME'));
-    $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST . ';port=' . DB_PORT . ';charset:utf8';
+    $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST . ';port=' . DB_PORT . ';charset=utf8';
     $dbh = new PDO($dsn, DB_USER, DB_PASS);
     return $dbh;
 }
@@ -23,7 +23,7 @@ function addArticle($input_text, $article, $lang_type_code)
     $stmt->bindParam(':lang_type_code', $lang_type_code);
     $stmt->execute();
 }
-$input_text = 'тестовая запись из php 2';
+$input_text = 'тестовая запись из php 3';
 $article = 'hat';
 $lang_type_code = 'ru-en';
 addArticle($input_text, $article, $lang_type_code);
