@@ -104,7 +104,7 @@ function short_output_detailed($input, $article)
 }
 
 // Один Вариант перевода (самый короткий, просто перевод)
-function shortest_output($input, $article)
+function shortest_output($article)
 {
     $data = json_decode($article);
     $reply = $data->def[0]->tr[0]->text;
