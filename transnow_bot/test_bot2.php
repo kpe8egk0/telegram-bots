@@ -39,13 +39,22 @@ function incoming($source, $message, $yandex_dict_key, $yandex_trans_key, $lang,
         } elseif ($command == '/help') {
             $reply = "Help message";
         } else {
-            $reply = "Unknown command or More then one word entered";
+            $reply = "Unknown command or More then one word entered!";
         }
 
     }
     else {
         if ($command == '/help') {
             $reply = "Help message";
+        }
+        elseif ($command == '/full'){
+            $reply = "Word for translation required!";
+        }
+        elseif ($command == '/short'){
+            $reply = "Word for translation required!";
+        }
+        elseif ($command == '/def'){
+            $reply = "Word for language definition required!";
         }
         else {
             $article = getArticleFromSource($source, $lang, $command, $yandex_dict_key, $ui);
