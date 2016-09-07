@@ -14,47 +14,43 @@ $output = json_decode($input_json, TRUE);
 $chat_id = $output['message']['chat']['id'];
 $message = $output['message']['text'];
 $username = $output['message']['from']['first_name'].' '.$output['message']['from']['last_name'];
-$ifcommand = $output['message']['entities']['type'];
 $lang = 'ru-en';
 
-$reply = incoming($source, $message, $yandex_dict_key, $yandex_trans_key, $ifcommand, $lang, $ui);
+$reply = incoming($source, $message, $yandex_dict_key, $yandex_trans_key, $lang, $ui);
 file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($reply));
 exit();
 
 //----------------------------------------------- Functions ----------------------------------------------
 
-function incoming($source, $message, $yandex_dict_key, $yandex_trans_key, $ifcommand, $lang, $ui)
+// Обработка входящего сообщения
+function incoming($source, $message, $yandex_dict_key, $yandex_trans_key, $lang, $ui)
 {
-    if (!empty($ifcommand))
-    {
-        $array_msg = explode( ' ', $message);
-        $article = getArticleFromSource($source, $lang, $array_msg[1], $yandex_dict_key, $ui);
-        if ($array_msg[0] == '/full')
-        {
-            $reply = full_output($array_msg[1], $article);
-        }
-        elseif ($array_msg[0] == '/short')
-        {
-            $reply = short_output_detailed($array_msg[1], $article);
-        }
-        elseif ($array_msg[0] == '/def')
-        {
-            $reply = $array_msg[1].' language is '.lang_def($array_msg[1], $yandex_trans_key);
-        }
-        elseif ($array_msg[0] == '/help')
-        {
+    $array_msg = explode(' ', $message, 2);
+    $command = $array_msg[0];
+    $msg = $array_msg[1];
+    if (!empty($msg)) {
+        $article = getArticleFromSource($source, $lang, $msg, $yandex_dict_key, $ui);
+        if ($command == '/full') {
+            $reply = full_output($msg, $article);
+        } elseif ($command == '/short') {
+            $reply = short_output_detailed($msg, $article);
+        } elseif ($command == '/def') {
+            $reply = $array_msg[1] . ' language is ' . lang_def($msg, $yandex_trans_key);
+        } elseif ($command == '/help') {
             $reply = "Help message";
-        }
-        else
-        {
-            $reply = "Unknown command";
+        } else {
+            $reply = "Unknown command or More then one word entered";
         }
 
     }
-    else
-    {
-        $article = getArticleFromSource($source, $lang, $message, $yandex_dict_key, $ui);
-        $reply = shortest_output($message, $article);
+    else {
+        if ($command == '/help') {
+            $reply = "Help message";
+        }
+        else {
+            $article = getArticleFromSource($source, $lang, $command, $yandex_dict_key, $ui);
+            $reply = shortest_output($article);
+        }
     }
     return $reply;
 }
