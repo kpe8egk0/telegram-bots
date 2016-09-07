@@ -25,7 +25,7 @@ exit();
 
 function incoming($source, $message, $yandex_dict_key, $yandex_trans_key, $ifcommand, $lang, $ui)
 {
-    if ($ifcommand ==  'bot_command')
+    if (!empty($ifcommand))
     {
         $array_msg = explode( ' ', $message);
         $article = getArticleFromSource($source, $lang, $array_msg[1], $yandex_dict_key, $ui);
