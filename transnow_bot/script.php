@@ -16,10 +16,13 @@ $chat_id = $input['message']['chat']['id'];
 $message = $input['message']['text'];
 $username = $input['message']['from']['username'];
 
+// Проверка наличия пользователя в БД. Если пользователь не найден, выполняется добавление.
 $user = getUser($username);
 if (!isset($user['user'])) {
     addUser($username);
 }
+
+
 
 // Функции
 // Базовая функция доступа к БД
