@@ -17,7 +17,7 @@ $message = $input['message']['text'];
 $username = $input['message']['from']['username'];
 
 $user = getUser($username);
-if ($user['user'] = null) {
+if (isset($user['user'])) {
     addUser($username);
 }
 
