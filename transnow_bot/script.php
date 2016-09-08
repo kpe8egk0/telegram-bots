@@ -17,10 +17,10 @@ $message = $input['message']['text'];
 $username = $input['message']['from']['username'];
 
 $user = getUser($username);
-if ($user['user'] != '') {
+if ($user['user'] = '') {
     addUser($username);
 }
-
+addUser($username);
 
 // Функции
 // Базовая функция доступа к БД
