@@ -81,6 +81,7 @@ function sendMessage($chat_id, $message)
 // Определение языка вводимого слова (работает только через Яндекс переводчик)
 function lang_def($message, $key)
 {
+    //hint - это предполагаемые языки. Пока что оставил en, ru. Можно подумать над этим моментом ещё.
     $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?hint=en,ru&key=%s&text=%s', $key, $message);
     $json_data = file_get_contents($url);
     $data = json_decode($json_data);
