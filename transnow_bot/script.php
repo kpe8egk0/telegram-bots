@@ -50,8 +50,6 @@ function getUser($user) {
 function addUser($user)
 {
     $db = db();
-    //$encode = $db->prepare('SET NAMES "utf8"');
-    //$encode->execute();
     $stmt = $db->prepare('INSERT INTO user (user, reg_date) VALUES (:user, NOW())');
     $stmt->bindParam(':user', $user);
     $stmt->execute();
