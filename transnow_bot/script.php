@@ -46,7 +46,7 @@ function getUser($user) {
     $stmt->execute();
     $row = $stmt->fetch();
 
-    return $row['admin'];
+    return $row;
 }
 
 // Регистрация нового пользователя
