@@ -17,7 +17,7 @@ $message = $input['message']['text'];
 $username = $input['message']['from']['username'];
 
 $user = getUser($username);
-if (array_key_exists('user', $user)) {
+if ($user['user'] != '') {
     sendMessage($chat_id, 'Пользователь @' . $username . ' уже зарегистрирован');
 }
 else {
