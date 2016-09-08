@@ -9,6 +9,8 @@ $api = 'https://api.telegram.org/bot' . $bot_access_token;
 // Доступ к словарю Яндекса
 $yandex_key = 'dict.1.1.20160819T080857Z.a21f9f5c92e0e7b9.ab24906e2b9b24a62bede201ca3067abadaf5752';
 
+//Доступ к переводчику Яндекса
+$yandex_trans_key = 'trnsl.1.1.20160906T144940Z.7b9bdff453462ecd.bcabb5b47a3afe432e57931793362ad73e47898f';
 
 $input = json_decode(file_get_contents('php://input'), TRUE);
 
@@ -74,4 +76,54 @@ function addArticle($input_text, $article, $lang_type_code)
 function sendMessage($chat_id, $message)
 {
     file_get_contents($GLOBALS['api'] . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($message));
+}
+
+// Определение языка вводимого слова (работает только через Яндекс переводчик)
+function lang_def($message, $key)
+{
+    $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?hint=en,ru&key=%s&text=%s', $key, $message);
+    $json_data = file_get_contents($url);
+    $data = json_decode($json_data);
+    $result = $data->lang;
+    return $result;
+}
+
+// Вывод нескольких вариантов перевода
+function full_output($input, $article)
+{
+    $data = json_decode($article);
+    for ($i = 0; $i<=4; $i++) {
+        $trans[$i] = $data->def[0]->tr[$i]->text;
+    }
+    $transfiltered = array_filter ($trans);
+    $result = 'The word "'.$input.'" translates like: '.implode(', ', $transfiltered).'.';
+    return $result;
+}
+
+// Вывод одного вариант перевода с частью речи и синонимом, если есть
+function short_output_detailed($input, $article)
+{
+    $data = json_decode($article);
+    $trans = $data->def[0]->tr[0]->text;
+    $pos = $data->def[0]->tr[0]->pos;
+    $syn = $data->def[0]->tr[0]->syn[0]->text;
+    //Если синонима нет, выводим просто перевод и часть речи
+    if (empty($syn))
+    {
+        $result = $trans.' ('.$pos.').';
+    }
+    else
+    {
+        $syn_pos = $data->def[0]->tr[0]->syn[0]->pos;
+        $result = $trans.' ('.$pos.'), synonym - '.$syn.'. ('.$syn_pos.').';
+    }
+    return $result;
+}
+
+// Вывод одного варианта перевода
+function shortest_output($article)
+{
+    $data = json_decode($article);
+    $result = $data->def[0]->tr[0]->text;
+    return $result;
 }
