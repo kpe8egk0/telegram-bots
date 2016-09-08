@@ -20,7 +20,6 @@ $user = getUser($username);
 if ($user['user'] = '') {
     addUser($username);
 }
-addUser($username);
 
 // Функции
 // Базовая функция доступа к БД
