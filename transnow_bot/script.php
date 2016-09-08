@@ -18,10 +18,10 @@ $username = $input['message']['from']['username'];
 
 $user = getUser($username);
 if (array_key_exists('user', $user)) {
-    sendMessage($chat_id, 'Пользователь' . $username . 'уже зарегистрирован');
+    sendMessage($chat_id, 'Пользователь @' . $username . ' уже зарегистрирован');
 }
 else {
-    sendMessage($chat_id, 'Пользователь' . $username . 'еще не зарегистрирован');
+    sendMessage($chat_id, 'Пользователь @' . $username . ' еще не зарегистрирован');
 }
 
 
