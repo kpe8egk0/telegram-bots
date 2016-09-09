@@ -25,11 +25,23 @@ if (!isset($user['user'])) {
 }
 
 
-
 // Определение языка ввода и языковогокода перевода
+$outputLangCode = '';
 $inputLangCode = detectInputLang($message, $yandex_trans_key);
+switch ($inputLangCode) {
 
-sendMessage($chat_id, $inputLangCode);
+    case 'ru':
+        $outputLangCode = 'ru-en';
+        break;
+    case 'en':
+        $outputLangCode = 'en-ru';
+        break;
+    default:
+        sendMessage($chat_id, 'Incorrect input language! Please, try again.');
+        exit();
+}
+
+sendDetailedOutput(getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key));
 
 // Функции
 // Базовая функция доступа к БД
@@ -46,7 +58,8 @@ function db()
 }
 
 // Получение пользователя по имени
-function getUser($user) {
+function getUser($user)
+{
     $db = db();
     $stmt = $db->prepare('SELECT * FROM user WHERE user = :user');
     $stmt->bindParam(':user', $user);
@@ -96,41 +109,46 @@ function detectInputLang($message, $key)
 }
 
 // Вывод нескольких вариантов перевода
-function full_output($input, $article)
+function sendFullOutput($input, $article)
 {
     $data = json_decode($article);
-    for ($i = 0; $i<=4; $i++) {
+    for ($i = 0; $i <= 4; $i++) {
         $trans[$i] = $data->def[0]->tr[$i]->text;
     }
-    $transfiltered = array_filter ($trans);
-    $result = 'The word "'.$input.'" translates like: '.implode(', ', $transfiltered).'.';
+    $transfiltered = array_filter($trans);
+    $result = 'The word "' . $input . '" translates like: ' . implode(', ', $transfiltered) . '.';
     return $result;
 }
 
 // Вывод одного вариант перевода с частью речи и синонимом, если есть
-function short_output_detailed($input, $article)
+function sendDetailedOutput($article)
 {
     $data = json_decode($article);
     $trans = $data->def[0]->tr[0]->text;
     $pos = $data->def[0]->tr[0]->pos;
     $syn = $data->def[0]->tr[0]->syn[0]->text;
     //Если синонима нет, выводим просто перевод и часть речи
-    if (empty($syn))
-    {
-        $result = $trans.' ('.$pos.').';
-    }
-    else
-    {
+    if (empty($syn)) {
+        $result = $trans . ' (' . $pos . ').';
+    } else {
         $syn_pos = $data->def[0]->tr[0]->syn[0]->pos;
-        $result = $trans.' ('.$pos.'), synonym - '.$syn.'. ('.$syn_pos.').';
+        $result = $trans . ' (' . $pos . '), synonym - ' . $syn . '. (' . $syn_pos . ').';
     }
     return $result;
 }
 
 // Вывод одного варианта перевода
-function shortest_output($article)
+function sendShortOutput($article)
 {
     $data = json_decode($article);
     $result = $data->def[0]->tr[0]->text;
     return $result;
+}
+
+// Получение статьи из внешнего источника
+function getArticleFromSource($source, $lang, $input_text, $key)
+{
+    $url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang=%s&text=%s', $key, $lang, $input_text);
+    $json_data = file_get_contents($url, TRUE);
+    return $json_data;
 }
