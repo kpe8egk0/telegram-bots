@@ -41,6 +41,8 @@ switch ($inputLangCode) {
         exit();
 }
 
+addLookup($user, $message, $outputLangCode);
+
 $output = sendDetailedOutput(getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key));
 sendMessage($chat_id, $output);
 
@@ -89,6 +91,17 @@ function addArticle($input_text, $article, $lang_type_code)
     $stmt->bindParam(':input_text', $input_text);
     $stmt->bindParam(':article', $article);
     $stmt->bindParam(':lang_type_code', $lang_type_code);
+    $stmt->execute();
+}
+
+// Добавление данных о поиске
+function addLookup($user, $input_text, $lang_code)
+{
+    $db = db();
+    $stmt = $db->prepare('INSERT INTO lookup (user, input_text, lang_code, date) VALUES (:user, :input_text, :lang_code, NOW())');
+    $stmt->bindParam(':user', $user);
+    $stmt->bindParam(':input_text', $input_text);
+    $stmt->bindParam(':lang_code', $lang_code);
     $stmt->execute();
 }
 
