@@ -28,7 +28,7 @@ if (!isset($user['user'])) {
 
 // Определение языка ввода и языковогокода перевода
 $inputLangCode = detectInputLang($message, $yandex_key);
-$inputLangCode = 'Not detected';
+
 sendMessage($chat_id, $inputLangCode);
 
 // Функции
