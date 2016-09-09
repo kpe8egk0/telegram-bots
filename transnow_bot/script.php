@@ -24,6 +24,18 @@ if (!isset($user['user'])) {
     addUser($username);
 }
 
+switch ($message) {
+    case '/start':
+        sendMessage($chat_id, 'Hi there! Please write any word for translation! (RU or EN)!');
+        exit();
+    case '/help':
+        sendMessage($chat_id, 'Here will be the help message! Someday :)');
+        exit();
+    default:
+        break;
+}
+
+
 // Определение языка ввода и языковогокода перевода
 $outputLangCode = '';
 $inputLangCode = detectInputLang($message, $yandex_trans_key);
@@ -41,6 +53,7 @@ switch ($inputLangCode) {
 
 $output_json = getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key);
 
+// Заглушка, если перевод не найден
 addLookup($username, $message, $outputLangCode);
 $decoded_json = json_decode($output_json);
 $trcheck = $decoded_json->def[0]->tr[0]->text;

@@ -15,6 +15,16 @@ $result = 'The word "'.$text.'" translates like: '.implode(', ', $transfiltered)
 echo $result;
 echo '. Array lenght is '.$translenght;
 */
+switch ($text) {
+    case '/start':
+        echo 'start command';
+        exit();
+    case '/help':
+        echo 'help command';
+        exit();
+    default:
+        break;
+}
 $empt = $data->def[0]->tr[0]->text;
 echo $empt;
 if (empty($empt))
