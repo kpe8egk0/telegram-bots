@@ -29,6 +29,11 @@ function sendDetailedOutput_new($article)
 {
     $result = '';
     $data = json_decode($article);
+
+    foreach ($data->def as $def) {
+
+    }
+
     foreach ($data->def[0]->tr[0]->syn as $syn) {
         $result = $result . ' ' . $syn->text;
     }
