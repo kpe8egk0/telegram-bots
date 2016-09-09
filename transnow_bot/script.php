@@ -24,12 +24,10 @@ if (!isset($user['user'])) {
     addUser($username);
 }
 
-
 // Определение языка ввода и языковогокода перевода
 $outputLangCode = '';
 $inputLangCode = detectInputLang($message, $yandex_trans_key);
 switch ($inputLangCode) {
-
     case 'ru':
         $outputLangCode = 'ru-en';
         break;
@@ -41,7 +39,9 @@ switch ($inputLangCode) {
         exit();
 }
 
-$output = sendDetailedOutput(getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key), $inputLangCode);
+addLookup($username, $message, $outputLangCode);
+
+$output = sendDetailedOutput(getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key));
 sendMessage($chat_id, $output);
 
 // Функции
@@ -92,6 +92,17 @@ function addArticle($input_text, $article, $lang_type_code)
     $stmt->execute();
 }
 
+// Добавление данных о поиске
+function addLookup($user, $input_text, $lang_code)
+{
+    $db = db();
+    $stmt = $db->prepare('INSERT INTO lookup (user, input_text, lang_code, date) VALUES (:user, :input_text, :lang_code, NOW())');
+    $stmt->bindParam(':user', $user);
+    $stmt->bindParam(':input_text', $input_text);
+    $stmt->bindParam(':lang_code', $lang_code);
+    $stmt->execute();
+}
+
 // Отправка сообщения
 function sendMessage($chat_id, $message)
 {
@@ -122,7 +133,7 @@ function sendFullOutput($input, $article)
 }
 
 // Вывод одного вариант перевода с частью речи и синонимом, если есть
-function sendDetailedOutput($article, $inputLangCode)
+function sendDetailedOutput($article)
 {
     $data = json_decode($article);
     $trans = $data->def[0]->tr[0]->text;
@@ -133,14 +144,7 @@ function sendDetailedOutput($article, $inputLangCode)
         $result = $trans . ' (' . $pos . ').';
     } else {
         $syn_pos = $data->def[0]->tr[0]->syn[0]->pos;
-        if ($inputLangCode == 'ru')
-        {
         $result = $trans . ' (' . $pos . '), synonym - ' . $syn . '. (' . $syn_pos . ').';
-        }
-        if ($inputLangCode == 'en')
-        {
-            $result = $trans . ' (' . $pos . '), синоним - ' . $syn . '. (' . $syn_pos . ').';
-        }
     }
     return $result;
 }
