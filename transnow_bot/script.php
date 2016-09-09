@@ -41,7 +41,7 @@ switch ($inputLangCode) {
         exit();
 }
 
-$output = sendDetailedOutput(getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key));
+$output = sendDetailedOutput(getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key), $inputLangCode);
 sendMessage($chat_id, $output);
 
 // Функции
@@ -122,7 +122,7 @@ function sendFullOutput($input, $article)
 }
 
 // Вывод одного вариант перевода с частью речи и синонимом, если есть
-function sendDetailedOutput($article)
+function sendDetailedOutput($article, $inputLangCode)
 {
     $data = json_decode($article);
     $trans = $data->def[0]->tr[0]->text;
@@ -133,7 +133,14 @@ function sendDetailedOutput($article)
         $result = $trans . ' (' . $pos . ').';
     } else {
         $syn_pos = $data->def[0]->tr[0]->syn[0]->pos;
+        if ($inputLangCode == 'ru')
+        {
         $result = $trans . ' (' . $pos . '), synonym - ' . $syn . '. (' . $syn_pos . ').';
+        }
+        if ($inputLangCode == 'en')
+        {
+            $result = $trans . ' (' . $pos . '), синоним - ' . $syn . '. (' . $syn_pos . ').';
+        }
     }
     return $result;
 }
