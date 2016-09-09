@@ -23,7 +23,7 @@ $user = getUser($username);
 if (!isset($user['user'])) {
     addUser($username);
 }
-
+$message = strtolower($message);
 switch ($message) {
     case '/start':
         sendMessage($chat_id, 'Hi there! Please write any word for translation! (RU or EN)! Привет! Пожалуйста, напиши любое слово для перевода! (RU или EN)');
