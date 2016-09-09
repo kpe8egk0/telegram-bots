@@ -5,7 +5,7 @@ echo sendDetailedOutput($json_data);
 
 echo '<br/><br/>';
 
-var_dump(json_decode($json_data, TRUE));
+echo json_encode(json_decode($json_data, TRUE), JSON_PRETTY_PRINT);
 
 function sendDetailedOutput($article)
 {
