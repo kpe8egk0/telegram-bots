@@ -3,6 +3,10 @@ $json_data = '{"head":{},"def":[{"text":"среда","pos":"существите
 
 echo sendDetailedOutput($json_data);
 
+echo '<br/><br/>';
+
+var_dump(json_decode($json_data, TRUE));
+
 function sendDetailedOutput($article)
 {
     $data = json_decode($article);
