@@ -41,8 +41,6 @@ switch ($inputLangCode) {
 
 $output_json = getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key);
 
-sendMessage($chat_id, $output_json);
-
 addArticle($message, $output_json, $outputLangCode);
 addLookup($username, $message, $outputLangCode);
 
