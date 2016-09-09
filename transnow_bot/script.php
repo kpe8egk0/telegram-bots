@@ -7,7 +7,7 @@ $bot_access_token = '261062241:AAHYU1rMeyMW4I0z6bxrwP3HpeaJKLVNXxs';
 $api = 'https://api.telegram.org/bot' . $bot_access_token;
 
 // Доступ к словарю Яндекса
-$yandex_key = 'dict.1.1.20160819T080857Z.a21f9f5c92e0e7b9.ab24906e2b9b24a62bede201ca3067abadaf5752';
+$yandex_dict_key = 'dict.1.1.20160819T080857Z.a21f9f5c92e0e7b9.ab24906e2b9b24a62bede201ca3067abadaf5752';
 
 //Доступ к переводчику Яндекса
 $yandex_trans_key = 'trnsl.1.1.20160906T144940Z.7b9bdff453462ecd.bcabb5b47a3afe432e57931793362ad73e47898f';
@@ -27,7 +27,7 @@ if (!isset($user['user'])) {
 
 
 // Определение языка ввода и языковогокода перевода
-$inputLangCode = detectInputLang($message, $yandex_key);
+$inputLangCode = detectInputLang($message, $yandex_trans_key);
 
 sendMessage($chat_id, $inputLangCode);
 
