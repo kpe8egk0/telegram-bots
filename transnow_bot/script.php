@@ -149,6 +149,6 @@ function sendShortOutput($article)
 function getArticleFromSource($source, $lang, $input_text, $key)
 {
     $url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang=%s&text=%s', $key, $lang, $input_text);
-    $json_data = file_get_contents($url, TRUE);
+    $json_data = file_get_contents($url);
     return $json_data;
 }
