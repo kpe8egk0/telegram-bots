@@ -31,6 +31,9 @@ switch ($message) {
     case '/help':
         sendMessage($chat_id, 'Here will be the help message! Someday :)');
         exit();
+    case '/lepra':
+        sendMessage($chat_id, 'Привет %username%!');
+        exit();
     default:
         break;
 }
