@@ -41,10 +41,17 @@ switch ($inputLangCode) {
 
 $output_json = getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key);
 
-addArticle($message, $output_json, $outputLangCode);
 addLookup($username, $message, $outputLangCode);
-
-$output_text = sendDetailedOutput($output_json, $inputLangCode);
+$decoded_json = json_decode($output_json);
+$trcheck = $decoded_json->def[0]->tr[0]->text;
+if (empty($trcheck))
+{
+    $output_text = "Translation was not found";
+}
+if (!empty($trcheck)) {
+    addArticle($message, $output_json, $outputLangCode);
+    $output_text = sendDetailedOutput($output_json, $inputLangCode);
+}
 
 sendMessage($chat_id, $output_text);
 
