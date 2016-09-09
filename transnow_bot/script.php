@@ -24,12 +24,10 @@ if (!isset($user['user'])) {
     addUser($username);
 }
 
-
 // Определение языка ввода и языковогокода перевода
 $outputLangCode = '';
 $inputLangCode = detectInputLang($message, $yandex_trans_key);
 switch ($inputLangCode) {
-
     case 'ru':
         $outputLangCode = 'ru-en';
         break;
@@ -41,7 +39,7 @@ switch ($inputLangCode) {
         exit();
 }
 
-addLookup($user, $message, $outputLangCode);
+addLookup($username, $message, $outputLangCode);
 
 $output = sendDetailedOutput(getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key));
 sendMessage($chat_id, $output);
