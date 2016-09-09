@@ -24,7 +24,10 @@ if (!isset($user['user'])) {
     addUser($username);
 }
 
+// Определение языка ввода и языковогокода перевода
+$inputLangCode = detectInputLang($message, $yandex_key);
 
+sendMessage($chat_id, $inputLangCode);
 
 // Функции
 // Базовая функция доступа к БД
@@ -40,6 +43,7 @@ function db()
     return $dbh;
 }
 
+// Получение пользователя по имени
 function getUser($user) {
     $db = db();
     $stmt = $db->prepare('SELECT * FROM user WHERE user = :user');
@@ -79,7 +83,7 @@ function sendMessage($chat_id, $message)
 }
 
 // Определение языка вводимого слова (работает только через Яндекс переводчик)
-function lang_def($message, $key)
+function detectInputLang($message, $key)
 {
     //hint - это предполагаемые языки. Пока что оставил en, ru. Можно подумать над этим моментом ещё.
     $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?hint=en,ru&key=%s&text=%s', $key, $message);
