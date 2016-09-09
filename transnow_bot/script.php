@@ -28,10 +28,10 @@ switch ($message) {
     case '/start':
         sendMessage($chat_id, 'Hi there! Please write any word for translation! (RU or EN)! Привет! Пожалуйста, напиши любое слово для перевода! (RU или EN)');
         exit();
-    case '/help-ru':
+    case '/help_ru':
         sendMessage($chat_id, 'Здесь будет сообщение с помощью! Когда-нибудь :)');
         exit();
-    case '/help-en':
+    case '/help_en':
         sendMessage($chat_id, 'Here will be the help message! Someday :)');
         exit();
     case '/lepra':
