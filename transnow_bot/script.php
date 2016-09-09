@@ -171,9 +171,9 @@ function sendDetailedOutput($article, $inputLangCode)
 
     foreach ($data->def as $def) {
         $pos = $def->pos;
-        $result = $result . '\n(' . $pos . ') ';
+        $result = $result . "\n(" . $pos . ")";
         foreach ($def->tr as $tr) {
-            $result = $result . ' ' . $tr->text;
+            $result = $result . " " . $tr->text;
         }
     }
 
