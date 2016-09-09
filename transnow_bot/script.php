@@ -170,10 +170,14 @@ function sendDetailedOutput($article, $inputLangCode)
     $data = json_decode($article);
 
     foreach ($data->def as $def) {
+        $commaFlag = false;
         $pos = $def->pos;
         $result = $result . "\n(" . $pos . ")";
         foreach ($def->tr as $tr) {
+            if ($commaFlag)
+                $result = $result . ",";
             $result = $result . " " . $tr->text;
+            $commaFlag = true;
         }
     }
 
