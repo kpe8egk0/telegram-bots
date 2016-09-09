@@ -43,7 +43,7 @@ $output_json = getArticleFromSource('yandex', $outputLangCode, $message, $yandex
 
 sendMessage($chat_id, $output_json);
 
-addArticle($message, $article, $outputLangCode);
+addArticle($message, $output_json, $outputLangCode);
 addLookup($username, $message, $outputLangCode);
 
 $output_text = sendDetailedOutput($output_json, $inputLangCode);
