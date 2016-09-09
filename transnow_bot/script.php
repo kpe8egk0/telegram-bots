@@ -24,6 +24,8 @@ if (!isset($user['user'])) {
     addUser($username);
 }
 
+$inputLangCode = 'Not detected';
+
 // Определение языка ввода и языковогокода перевода
 $inputLangCode = detectInputLang($message, $yandex_key);
 
