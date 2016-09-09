@@ -39,10 +39,14 @@ switch ($inputLangCode) {
         exit();
 }
 
+$output_json = getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key);
+
 addLookup($username, $message, $outputLangCode);
 
-$output = sendDetailedOutput(getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key));
-sendMessage($chat_id, $output);
+addArticle($message, $article, $outputLangCode);
+
+$output_text = sendDetailedOutput($output_json);
+sendMessage($chat_id, $output_text);
 
 // Функции
 // Базовая функция доступа к БД
@@ -80,15 +84,15 @@ function addUser($user)
 }
 
 // Добавление статьи в БД
-function addArticle($input_text, $article, $lang_type_code)
+function addArticle($input_text, $article, $lang_code)
 {
     $db = db();
     //$encode = $db->prepare('SET NAMES "utf8"');
     //$encode->execute();
-    $stmt = $db->prepare('INSERT INTO article (input_text, article, lang_type_code) VALUES (:input_text, :article, :lang_type_code)');
+    $stmt = $db->prepare('INSERT INTO article (input_text, article, lang_type_code) VALUES (:input_text, :article, :lang_code)');
     $stmt->bindParam(':input_text', $input_text);
     $stmt->bindParam(':article', $article);
-    $stmt->bindParam(':lang_type_code', $lang_type_code);
+    $stmt->bindParam(':lang_code', $lang_code);
     $stmt->execute();
 }
 
