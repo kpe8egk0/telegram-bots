@@ -31,7 +31,7 @@ function sendDetailedOutput_new($article)
     $data = json_decode($article);
 
     foreach ($data->def as $def) {
-        $pos = $data->def[0]->tr[0]->pos;
+        $pos = $data->def->pos;
         $result = $result . '\n(' . $pos . ') ';
         foreach ($def->tr as $tr) {
             $result = $result . ' ' . $tr->text;
