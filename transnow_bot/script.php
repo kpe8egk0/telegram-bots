@@ -145,10 +145,10 @@ function sendDetailedOutput($article, $inputLangCode)
     } else {
         $syn_pos = $data->def[0]->tr[0]->syn[0]->pos;
         if ($inputLangCode == 'ru') {
-            $result = $trans . ' (' . $pos . '), synonym - ' . $syn . '. (' . $syn_pos . ').';
+            $result = $trans . ' (' . $pos . '), synonym - ' . $syn . ' (' . $syn_pos . ').';
         }
         else {
-            $result = $trans . ' (' . $pos . '), синоним - ' . $syn . '. (' . $syn_pos . ').';
+            $result = $trans . ' (' . $pos . '), синоним - ' . $syn . ' (' . $syn_pos . ').';
         }
     }
     return $result;
