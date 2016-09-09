@@ -24,11 +24,11 @@ if (!isset($user['user'])) {
     addUser($username);
 }
 
-$inputLangCode = 'Not detected';
+
 
 // Определение языка ввода и языковогокода перевода
 $inputLangCode = detectInputLang($message, $yandex_key);
-
+$inputLangCode = 'Not detected';
 sendMessage($chat_id, $inputLangCode);
 
 // Функции
