@@ -8,7 +8,7 @@ echo '<br/><br/>';
 $json = json_decode($json_data, TRUE);
 print("<pre>".print_r($json,true)."</pre>");
 
-function sendDetailedOutput($article)
+/*function sendDetailedOutput($article)
 {
     $data = json_decode($article);
     $trans = $data->def[0]->tr[0]->text;
@@ -22,5 +22,16 @@ function sendDetailedOutput($article)
         $result = $trans . ' (' . $pos . '), synonym - ' . $syn . ' (' . $syn_pos . ').';
 
     }
+    return $result;
+}*/
+
+function sendDetailedOutput2($article)
+{
+    $result = '';
+    $data = json_decode($article);
+    foreach ($data->def[0]->tr[0]->syn as $syn) {
+        $result = $result . ' ' . $syn['text'];
+    }
+
     return $result;
 }
