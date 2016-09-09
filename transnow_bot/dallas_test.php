@@ -5,9 +5,8 @@ echo sendDetailedOutput($json_data);
 
 echo '<br/><br/>';
 
-echo '<div style="font-family: monospace; white-space:pre;">';
-echo json_encode($json_data, JSON_PRETTY_PRINT);
-echo '</div>';
+$json = json_decode($json_data);
+echo json_encode($json, JSON_PRETTY_PRINT);
 
 function sendDetailedOutput($article)
 {
