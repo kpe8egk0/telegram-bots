@@ -45,7 +45,7 @@ addLookup($username, $message, $outputLangCode);
 
 addArticle($message, $article, $outputLangCode);
 
-$output_text = sendDetailedOutput($output_json);
+$output_text = sendDetailedOutput($output_json, $inputLangCode);
 sendMessage($chat_id, $output_text);
 
 // Функции
