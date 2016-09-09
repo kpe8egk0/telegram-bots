@@ -166,22 +166,17 @@ function sendFullOutput($input, $article)
 // Вывод одного вариант перевода с частью речи и синонимом, если есть
 function sendDetailedOutput($article, $inputLangCode)
 {
+    $result = '';
     $data = json_decode($article);
-    $trans = $data->def[0]->tr[0]->text;
-    $pos = $data->def[0]->tr[0]->pos;
-    $syn = $data->def[0]->tr[0]->syn[0]->text;
-    //Если синонима нет, выводим просто перевод и часть речи
-    if (empty($syn)) {
-        $result = $trans . ' (' . $pos . ').';
-    } else {
-        $syn_pos = $data->def[0]->tr[0]->syn[0]->pos;
-        if ($inputLangCode == 'ru') {
-            $result = $trans . ' (' . $pos . '), synonym - ' . $syn . ' (' . $syn_pos . ').';
-        }
-        else {
-            $result = $trans . ' (' . $pos . '), синоним - ' . $syn . ' (' . $syn_pos . ').';
+
+    foreach ($data->def as $def) {
+        $pos = $def->pos;
+        $result = $result . '\n(' . $pos . ') ';
+        foreach ($def->tr as $tr) {
+            $result = $result . ' ' . $tr->text;
         }
     }
+
     return $result;
 }
 
