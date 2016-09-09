@@ -30,7 +30,7 @@ function sendDetailedOutput_new($article)
     $result = '';
     $data = json_decode($article);
     foreach ($data->def[0]->tr[0]->syn as $syn) {
-        $result = $result . ' ' . $syn['text'];
+        $result = $result . ' ' . $syn->text;
     }
 
     return $result;
