@@ -41,7 +41,8 @@ switch ($inputLangCode) {
         exit();
 }
 
-sendDetailedOutput(getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key));
+$output = sendDetailedOutput(getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key));
+sendMessage($chat_id, $output);
 
 // Функции
 // Базовая функция доступа к БД
