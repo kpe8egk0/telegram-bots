@@ -53,12 +53,14 @@ switch ($inputLangCode) {
         $outputLangCode = 'en-ru';
         break;
     default:
+        $outputLangCode = 'error';
+        addLookup($username, $message, $outputLangCode);
         sendMessage($chat_id, 'Incorrect input language! Please, try again.');
         exit();
 }
 
 $output_json = getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key);
-
+addLookup($username, $message, $outputLangCode);
 // Заглушка, если перевод не найден
 $decoded_json = json_decode($output_json);
 $trcheck = $decoded_json->def[0]->tr[0]->text;
@@ -68,7 +70,6 @@ if (empty($trcheck))
 }
 if (!empty($trcheck)) {
     addArticle($message, $output_json, $outputLangCode);
-    addLookup($username, $message, $outputLangCode);
     $output_text = sendDetailedOutput($output_json, $inputLangCode);
 }
 
