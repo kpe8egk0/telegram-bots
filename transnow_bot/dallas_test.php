@@ -32,6 +32,6 @@ function sendDetailedOutput2($article)
     foreach ($data->def[0]->tr[0]->syn as $syn) {
         $result = $result . ' ' . $syn['text'];
     }
-
+ 
     return $result;
 }
