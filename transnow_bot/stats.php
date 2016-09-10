@@ -40,13 +40,13 @@ function getArticleTotalAmount() {
 
 function getLookupLastN($n) {
     $db = db();
-    $stmt = $db->prepare('SELECT * FROM lookup lkp LEFT JOIN article rtcl ON lkp.input_text = rtcl.input_text ORDER BY id DESC LIMIT :n');
+    $stmt = $db->prepare('SELECT lkp.date as date, lkp.user as user, lkp.input_text as input_text FROM lookup lkp LEFT JOIN article rtcl ON lkp.input_text = rtcl.input_text ORDER BY id DESC LIMIT :n');
     $stmt->bindParam(':n', $n, PDO::PARAM_INT);
     $stmt->execute();
 
     $output = '';
     foreach ($stmt as $row) {
-        $output = $output . '<br/>[' . $row['lookup.date'] . '] ' . $row['lookup.user'] . ': "' . $row['lookup.input_text'] . '"';
+        $output = $output . '<br/>[' . $row['date'] . '] ' . $row['user'] . ': "' . $row['input_text'] . '"';
     }
 
     return $output;
