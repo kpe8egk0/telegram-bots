@@ -1,10 +1,10 @@
 <?php
 
-
+$n = 10;
 
 echo 'Всего запросов: ' . getLookupTotalAmount() . '<br/>';
 echo 'Всего статей: ' . getArticleTotalAmount() . '<br/>';
-echo 'Последние 5 запросов: ' . getLookupLastN(5);
+echo 'Последние '. $n . 'запросов: ' . getLookupLastN($n);
 
 function db()
 {
