@@ -4,7 +4,7 @@ $n = 10;
 
 echo 'Всего запросов: ' . getLookupTotalAmount() . '<br/>';
 echo 'Всего статей: ' . getArticleTotalAmount() . '<br/>';
-echo 'Последние '. $n . 'запросов: ' . getLookupLastN($n);
+echo 'Последние '. $n . ' запросов: ' . getLookupLastN($n);
 
 function db()
 {
