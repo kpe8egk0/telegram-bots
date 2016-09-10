@@ -47,9 +47,9 @@ function getLookupLastN($n) {
     $output = '';
     foreach ($stmt as $row) {
         if ($row['flag'] == '') {
-            $flag = 'INVALID';
+            $flag = '-';
         } else {
-            $flag = 'VALID';
+            $flag = '+';
         }
         $output = $output . '<br/>[' . $row['date'] . '] ' . $row['user'] . ': "' . $row['input_text'] . '"' . ' (' . $flag . ')';
     }
