@@ -29,13 +29,13 @@ switch ($message) {
         sendMessage($chat_id, 'Hi there! Please write any word for translation! (RU or EN)! Привет! Пожалуйста, напиши любое слово для перевода! (RU или EN)');
         exit();
     case '/help_ru':
-        sendMessage($chat_id, 'Здесь будет сообщение с помощью! Когда-нибудь :)');
+        sendMessage($chat_id, 'Привет! \n Этот бот может помочь тебе с переводом слова, или фразового глагола с русского на английский и наоборот. Просто напиши слово на нужном языке и получишь перевод.');
         exit();
     case '/help_en':
-        sendMessage($chat_id, 'Here will be the help message! Someday :)');
+        sendMessage($chat_id, 'Hi there! \n This bot can help you to translate a word of a phrasal verb from russian to english and conversely. You just write the word using the language you need.');
         exit();
     case '/lepra':
-        sendMessage($chat_id, 'Привет %username%!');
+        sendMessage($chat_id, 'Привет, %username%!');
         exit();
     default:
         break;
