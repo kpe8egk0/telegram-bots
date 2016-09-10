@@ -46,7 +46,7 @@ function getLookupLastN($n) {
 
     $output = '';
     foreach ($stmt as $row) {
-        $output = $output . '<br/>[' . $row['date'] . '] ' . $row['user'] . ': "' . $row['input_text'] . '"';
+        $output = $output . '<br/>[' . $row['lookup.date'] . '] ' . $row['lookup.user'] . ': "' . $row['lookup.input_text'] . '"';
     }
 
     return $output;
