@@ -40,8 +40,8 @@ function getArticleTotalAmount() {
 
 function getLookupLastN($n) {
     $db = db();
-    $stmt = $db->prepare('SELECT * FROM lookup ORDER BY id DESC LIMIT :n');
-    $stmt->bindParam(':n', $n);
+    $stmt = $db->prepare('SELECT * FROM lookup ORDER BY id DESC LIMIT 5');
+    //$stmt->bindParam(':n', $n);
     $stmt->execute();
 
     $output = '';
