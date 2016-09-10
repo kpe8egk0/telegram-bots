@@ -4,7 +4,7 @@
 
 echo 'Всего запросов: ' . getLookupTotalAmount() . '<br/>';
 echo 'Всего статей: ' . getArticleTotalAmount() . '<br/>';
-echo 'Последние 5 запросов: <br/>' . getLookupLastN();
+echo 'Последние 5 запросов: ' . getLookupLastN(5);
 
 function db()
 {
@@ -29,9 +29,25 @@ function getLookupTotalAmount() {
 }
 
 function getArticleTotalAmount() {
+    $db = db();
+    $stmt = $db->prepare('SELECT COUNT(*) FROM article');
+    $stmt->execute();
 
+    $output = $stmt->fetchColumn();
+
+    return $output;
 }
 
-function getLookupLastN() {
+function getLookupLastN($n) {
+    $db = db();
+    $stmt = $db->prepare('SELECT * FROM lookup ORDER BY id DESC LIMIT :n');
+    $stmt->bindParam(':n', $n);
+    $stmt->execute();
 
+    $output = '';
+    foreach ($stmt as $row) {
+        $output = $output . '<br/>' . $row['user'] . ': ' . $row['input_text'];
+    }
+
+    return $output;
 }
