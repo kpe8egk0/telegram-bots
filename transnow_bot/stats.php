@@ -46,7 +46,7 @@ function getLookupLastN($n) {
 
     $output = '';
     foreach ($stmt as $row) {
-        if ($row['date'] == '') {
+        if ($row['flag'] == '') {
             $flag = 'INVALID';
         } else {
             $flag = 'VALID';
