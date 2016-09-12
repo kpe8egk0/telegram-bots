@@ -21,7 +21,7 @@ $username = $input['message']['from']['username'];
 // Проверка наличия пользователя в БД. Если пользователь не найден, выполняется добавление.
 $user = getUser($username);
 if (!isset($user['user'])) {
-    addUser($username);
+    addUser($username, $chat_id);
 }
 $message = strtolower($message);
 switch ($message) {
@@ -102,11 +102,12 @@ function getUser($user)
 }
 
 // Регистрация нового пользователя
-function addUser($user)
+function addUser($user, $chat_id)
 {
     $db = db();
-    $stmt = $db->prepare('INSERT INTO user (user, reg_date) VALUES (:user, NOW())');
+    $stmt = $db->prepare('INSERT INTO user (user, reg_date, chat_id) VALUES (:user, NOW(), :chat_id)');
     $stmt->bindParam(':user', $user);
+    $stmt->bindParam(':chat_id', $chat_id);
     $stmt->execute();
 }
 
