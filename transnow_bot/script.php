@@ -23,6 +23,12 @@ $user = getUser($username);
 if (!isset($user['user'])) {
     addUser($username, $chat_id);
 }
+
+// Проверка актуальности chat_id пользователя.
+if ($user['chat_id'] != $chat_id) {
+    updateUsersChatID($username, $chat_id);
+}
+
 $message = strtolower($message);
 switch ($message) {
     case '/start':
@@ -110,6 +116,17 @@ function addUser($user, $chat_id)
     $stmt->bindParam(':chat_id', $chat_id);
     $stmt->execute();
 }
+
+// Обновление chat_id пользователя
+function updateUsersChatID($user, $chat_id)
+{
+    $db = db();
+    $stmt = $db->prepare('UPDATE user SET chat_id = :chat_id WHERE user = :user');
+    $stmt->bindParam(':user', $user);
+    $stmt->bindParam(':chat_id', $chat_id);
+    $stmt->execute();
+}
+
 
 // Добавление статьи в БД
 function addArticle($input_text, $article, $lang_code)
