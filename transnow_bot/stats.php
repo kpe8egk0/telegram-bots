@@ -5,8 +5,8 @@ $n = 100;
 
 echo 'Всего запросов: ' . getLookupTotalAmount() . '<br/>';
 echo 'Всего статей: ' . getArticleTotalAmount() . '<br/>';
-echo 'Всего пользователей: ' . getUserTotalAmount() . '<hr>';
-echo 'Последние '. $n . ' запросов: ' . getLookupLastN($n);
+echo 'Всего пользователей: ' . getUserTotalAmount() . '<br/>';
+echo 'Последние '. $n . ' запросов: <br/>' . getLookupLastN($n);
 
 function db()
 {
