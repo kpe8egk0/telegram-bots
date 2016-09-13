@@ -74,7 +74,7 @@ if (empty($trcheck))
 {
     $output_json = getArticleFromSource('yandex_trans', $outputLangCode, $message, $yandex_trans_key);
     $decoded_json = json_decode($output_json);
-    if ($decoded_json->code != 200) {
+    if ($decoded_json->text[0] == $message) {
         $output_text = "Translation was not found";
     }
     else {
