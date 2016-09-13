@@ -73,11 +73,11 @@ $trcheck = $decoded_json->def[0]->tr[0]->text;
 if (empty($trcheck))
 {
     $output_json = getArticleFromSource('yandex_trans', $outputLangCode, $message, $yandex_trans_key);
-    if (empty($decoded_json->text)) {
+    if (empty(json_decode($output_json)->text)) {
         $output_text = "Translation was not found";
     }
     else {
-        $output_text = $decoded_json->text;
+        $output_text = json_decode($output_json)->text;
     }
 }
 if (!empty($trcheck)) {
