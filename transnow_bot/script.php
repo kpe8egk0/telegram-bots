@@ -32,13 +32,13 @@ if ($user['chat_id'] != $chat_id) {
 $message = strtolower($message);
 switch ($message) {
     case '/start':
-        sendMessage($chat_id, 'Hi there! Please write any word for translation! (RU or EN)! Привет! Пожалуйста, напиши любое слово для перевода! (RU или EN)');
+        sendMessage($chat_id, 'Привет! Пожалуйста, напиши любое слово, или предложение для перевода! (RU или EN) Hi there! Please write any word or sentence for translation! (RU or EN)!');
         exit();
     case '/help_ru':
-        sendMessage($chat_id, 'Привет! Этот бот может помочь тебе с переводом слова, или фразового глагола с русского на английский и наоборот. Просто напиши слово на нужном языке и получишь перевод.');
+        sendMessage($chat_id, 'Привет! Этот бот может помочь тебе с переводом слова, или предложения с русского на английский и наоборот. Просто напиши слово, или предложение на нужном языке и получишь перевод.');
         exit();
     case '/help_en':
-        sendMessage($chat_id, 'Hi there! This bot can help you to translate some word or a phrasal verb from russian to english and conversely. You just need to write the word using the language you need.');
+        sendMessage($chat_id, 'Hi there! This bot can help you to translate some word or a sentence from russian to english and conversely. You just need to write the word or sentence using the language you need.');
         exit();
     case '/lepra':
         sendMessage($chat_id, 'Привет, %username%!');
