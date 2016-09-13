@@ -117,8 +117,8 @@ function getUser($user)
 // Регистрация нового пользователя
 function addUser($user, $chat_id)
 {
-    sendMessage('120380354', 'New user: @' . $user);
-    sendMessage('186410705', 'New user: @' . $user);
+    sendMessage('120380354', 'New user: @' . $user . ' (chat_id: ' . $chat_id . ')');
+    sendMessage('186410705', 'New user: @' . $user . ' (chat_id: ' . $chat_id . ')');
     $db = db();
     $stmt = $db->prepare('INSERT INTO user (user, reg_date, chat_id) VALUES (:user, NOW(), :chat_id)');
     $stmt->bindParam(':user', $user);
