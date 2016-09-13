@@ -63,7 +63,7 @@ function getLookupLastN($n) {
         } else {
             $flag = '+';
         }
-        $output = $output . '<br/>[' . $row['date'] . '] (' . $flag . ')' . $row['user'] . ': "' . $row['input_text'] . '" -> "' . $row['output_text'] . '"';
+        $output = $output . '<br/>[' . $row['date'] . '] (' . $flag . ') ' . $row['user'] . ': "' . $row['input_text'] . '" -> "' . $row['output_text'] . '"';
     }
 
     return $output;
