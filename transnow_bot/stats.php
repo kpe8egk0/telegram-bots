@@ -5,6 +5,7 @@ $n = 100;
 
 echo 'Всего запросов: ' . getLookupTotalAmount() . '<br/>';
 echo 'Всего статей: ' . getArticleTotalAmount() . '<br/>';
+echo 'Всего пользователей: ' . getUserTotalAmount() . '<hr>';
 echo 'Последние '. $n . ' запросов: ' . getLookupLastN($n);
 
 function db()
@@ -32,6 +33,16 @@ function getLookupTotalAmount() {
 function getArticleTotalAmount() {
     $db = db();
     $stmt = $db->prepare('SELECT COUNT(*) FROM article');
+    $stmt->execute();
+
+    $output = $stmt->fetchColumn();
+
+    return $output;
+}
+
+function getUserTotalAmount() {
+    $db = db();
+    $stmt = $db->prepare('SELECT COUNT(*) FROM user');
     $stmt->execute();
 
     $output = $stmt->fetchColumn();
