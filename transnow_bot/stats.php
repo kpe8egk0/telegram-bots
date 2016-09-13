@@ -52,7 +52,7 @@ function getUserTotalAmount() {
 
 function getLookupLastN($n) {
     $db = db();
-    $stmt = $db->prepare('SELECT lkp.date as date, lkp.user as user, lkp.input_text as input_text, rtcl.input_text as flag FROM lookup lkp LEFT JOIN article rtcl ON lkp.input_text = rtcl.input_text ORDER BY id DESC LIMIT :n');
+    $stmt = $db->prepare('SELECT lkp.date as date, lkp.user as user, lkp.input_text as input_text, lkp.output_text as output_text, rtcl.input_text as flag FROM lookup lkp LEFT JOIN article rtcl ON lkp.input_text = rtcl.input_text ORDER BY id DESC LIMIT :n');
     $stmt->bindParam(':n', $n, PDO::PARAM_INT);
     $stmt->execute();
 
@@ -63,7 +63,7 @@ function getLookupLastN($n) {
         } else {
             $flag = '+';
         }
-        $output = $output . '<br/>[' . $row['date'] . '] ' . $row['user'] . ': "' . $row['input_text'] . '"' . ' (' . $flag . ')';
+        $output = $output . '<br/>[' . $row['date'] . '] (' . $flag . ')' . $row['user'] . ': "' . $row['input_text'] . '" -> "' . $row['output_text'] . '"';
     }
 
     return $output;
