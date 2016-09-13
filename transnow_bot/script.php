@@ -65,14 +65,20 @@ switch ($inputLangCode) {
         exit();
 }
 
-$output_json = getArticleFromSource('yandex', $outputLangCode, $message, $yandex_dict_key);
+$output_json = getArticleFromSource('yandex_dict', $outputLangCode, $message, $yandex_dict_key);
 addLookup($username, $message, $outputLangCode);
 // Заглушка, если перевод не найден
 $decoded_json = json_decode($output_json);
 $trcheck = $decoded_json->def[0]->tr[0]->text;
 if (empty($trcheck))
 {
-    $output_text = "Translation was not found";
+    $output_json = getArticleFromSource('yandex_dict', $outputLangCode, $message, $yandex_dict_key);
+    if (empty($decoded_json->text)) {
+        $output_text = "Translation was not found";
+    }
+    else {
+        $output_text = $decoded_json->text;
+    }
 }
 if (!empty($trcheck)) {
     addArticle($message, $output_json, $outputLangCode);
@@ -213,7 +219,19 @@ function sendShortOutput($article)
 // Получение статьи из внешнего источника
 function getArticleFromSource($source, $lang, $input_text, $key)
 {
-    $url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang=%s&text=%s', $key, $lang, $input_text);
-    $json_data = file_get_contents($url);
+    $json_data = '';
+    switch ($source) {
+        case 'yandex_trans':
+            $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/translate?key=%s&lang=%s&text=%s', $key, $lang, $input_text);
+            $json_data = file_get_contents($url);
+            break;
+        case 'yandex_dict':
+            $url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang=%s&text=%s', $key, $lang, $input_text);
+            $json_data = file_get_contents($url);
+            break;
+        default:
+            break;
+    }
+
     return $json_data;
 }
