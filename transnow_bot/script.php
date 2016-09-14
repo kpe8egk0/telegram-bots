@@ -17,7 +17,15 @@ $input = json_decode(file_get_contents('php://input'), TRUE);
 $chat_id = $input['message']['chat']['id'];
 $message = $input['message']['text'];
 $username = $input['message']['from']['username'];
-$full_name = $input['message']['from']['first_name'] . ' '. $input['message']['from']['last_name'];
+//Проверка на пустоту last_name
+if (!empty($input['message']['from']['last_name']))
+{
+    $full_name = $input['message']['from']['first_name'] . ' '. $input['message']['from']['last_name'];
+}
+else
+{
+    $full_name = $input['message']['from']['first_name'];
+}
 
 if ($chat_id == getManualChatID()['value']) {
     sendMessage($chat_id, 'Ok!');
