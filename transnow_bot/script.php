@@ -18,6 +18,11 @@ $chat_id = $input['message']['chat']['id'];
 $message = $input['message']['text'];
 $username = $input['message']['from']['username'];
 
+if ($chat_id == getManualChatID()['value']) {
+    sendMessage($chat_id, 'Ok!');
+    exit();
+}
+
 // Проверка наличия пользователя в БД. Если пользователь не найден, выполняется добавление.
 $user = getUser($username);
 if (!isset($user['user'])) {
@@ -237,4 +242,18 @@ function getArticleFromSource($source, $lang, $input_text, $key)
     }
 
     return $json_data;
+}
+
+// Получение ID чата на ручном управлении
+function getManualChatID()
+{
+    $code = 'manual_chat_id';
+
+    $db = db();
+    $stmt = $db->prepare('SELECT value FROM user WHERE code = :code');
+    $stmt->bindParam(':code', $code);
+    $stmt->execute();
+    $row = $stmt->fetch();
+
+    return $row;
 }
