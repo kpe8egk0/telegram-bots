@@ -19,6 +19,11 @@ $message = $input['message']['text'];
 $username = $input['message']['from']['username'];
 $full_name = $input['message']['from']['first_name'] . ' '. $input['message']['from']['last_name'];
 
+if ($chat_id == getManualChatID()['value']) {
+    sendMessage($chat_id, 'Ok!');
+    exit();
+}
+
 // Проверка наличия пользователя в БД. Если пользователь не найден, выполняется добавление.
 $user = getUser($username);
 if (!isset($user['user'])) {
@@ -67,7 +72,6 @@ switch ($inputLangCode) {
 }
 
 $output_json = getArticleFromSource('yandex_dict', $outputLangCode, $message, $yandex_dict_key);
-addLookup($username, $message, $outputLangCode);
 // Заглушка, если перевод не найден
 $decoded_json = json_decode($output_json);
 $trcheck = $decoded_json->def[0]->tr[0]->text;
@@ -86,7 +90,7 @@ if (!empty($trcheck)) {
     addArticle($message, $output_json, $outputLangCode);
     $output_text = sendDetailedOutput($output_json, $inputLangCode);
 }
-
+addLookup($username, $message, $outputLangCode, $output_text);
 sendMessage($chat_id, $output_text);
 
 // Функции
@@ -152,13 +156,14 @@ function addArticle($input_text, $article, $lang_code)
 }
 
 // Добавление данных о поиске
-function addLookup($user, $input_text, $lang_code)
+function addLookup($user, $input_text, $lang_code, $output_text)
 {
     $db = db();
-    $stmt = $db->prepare('INSERT INTO lookup (user, input_text, lang_code, date) VALUES (:user, :input_text, :lang_code, NOW())');
+    $stmt = $db->prepare('INSERT INTO lookup (user, input_text, lang_code, date, output_text) VALUES (:user, :input_text, :lang_code, NOW(), :output_text)');
     $stmt->bindParam(':user', $user);
     $stmt->bindParam(':input_text', $input_text);
     $stmt->bindParam(':lang_code', $lang_code);
+    $stmt->bindParam(':output_text', $output_text);
     $stmt->execute();
 }
 
@@ -238,4 +243,18 @@ function getArticleFromSource($source, $lang, $input_text, $key)
     }
 
     return $json_data;
+}
+
+// Получение ID чата на ручном управлении
+function getManualChatID()
+{
+    $code = 'manual_chat_id';
+
+    $db = db();
+    $stmt = $db->prepare('SELECT value FROM param WHERE code = :code');
+    $stmt->bindParam(':code', $code);
+    $stmt->execute();
+    $row = $stmt->fetch();
+
+    return $row;
 }
