@@ -35,7 +35,7 @@ if ($chat_id == getManualChatID()['value']) {
 // Проверка наличия пользователя в БД. Если пользователь не найден, выполняется добавление.
 $user = getUser($username);
 if (!isset($user['user'])) {
-    addUser($username, $chat_id);
+    addUser($username, $chat_id, $message);
 }
 
 // Проверка актуальности chat_id пользователя.
@@ -128,10 +128,10 @@ function getUser($user)
 }
 
 // Регистрация нового пользователя
-function addUser($user, $chat_id)
+function addUser($user, $chat_id, $text_temp)
 {
-    sendMessage('120380354', 'New user: @' . $user . ' (chat_id: ' . $chat_id . ')');
-    sendMessage('186410705', 'New user: @' . $user . ' (chat_id: ' . $chat_id . ')');
+    sendMessage('120380354', 'New user: @' . $user . ' (chat_id: ' . $chat_id . '): ' . $text_temp);
+    sendMessage('186410705', 'New user: @' . $user . ' (chat_id: ' . $chat_id . '): ' . $text_temp);
     $db = db();
     $stmt = $db->prepare('INSERT INTO user (user, reg_date, chat_id) VALUES (:user, NOW(), :chat_id)');
     $stmt->bindParam(':user', $user);
