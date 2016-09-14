@@ -250,7 +250,7 @@ function getManualChatID()
     $code = 'manual_chat_id';
 
     $db = db();
-    $stmt = $db->prepare('SELECT value FROM user WHERE code = :code');
+    $stmt = $db->prepare('SELECT value FROM param WHERE code = :code');
     $stmt->bindParam(':code', $code);
     $stmt->execute();
     $row = $stmt->fetch();
