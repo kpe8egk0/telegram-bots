@@ -46,7 +46,7 @@ if ($user['chat_id'] != $chat_id) {
 $message = strtolower($message);
 switch ($message) {
     case '/start':
-        sendMessage($chat_id, 'Привет! Пожалуйста, напиши любое слово, или предложение для перевода! (RU или EN) Hi there! Please write any word or sentence for translation! (RU or EN)!');
+        sendMessage($chat_id, 'Привет! Чтобы начать, пожалуйста, напиши любое слово, или предложение для перевода на русском или английском языке. Hi there! To start please write any word or sentence for translation in russian or english!');
         exit();
     case '/help_ru':
         sendMessage($chat_id, 'Привет! Этот бот может помочь тебе с переводом слова, или предложения с русского на английский и наоборот. Просто напиши слово, или предложение на нужном языке и получишь перевод.');
