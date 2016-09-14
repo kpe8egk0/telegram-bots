@@ -17,6 +17,7 @@ $input = json_decode(file_get_contents('php://input'), TRUE);
 $chat_id = $input['message']['chat']['id'];
 $message = $input['message']['text'];
 $username = $input['message']['from']['username'];
+$full_name = $input['message']['from']['first_name'] . ' '. $input['message']['from']['last_name'];
 
 // Проверка наличия пользователя в БД. Если пользователь не найден, выполняется добавление.
 $user = getUser($username);
