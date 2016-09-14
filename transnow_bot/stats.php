@@ -63,7 +63,7 @@ function getLookupLastN($n) {
         } else {
             $flag = '+';
         }
-        $output = $output . '<br/>[' . $row['date'] . '] (' . $flag . ') <a href="https://web.telegram.org/#/im?p=@' . $row['user'] . '>' . $row['user'] . '</a>: "' . $row['input_text'] . '" -> "' . $row['output_text'] . '"';
+        $output = $output . '<br/>[' . $row['date'] . '] (' . $flag . ') <a href="https://web.telegram.org/#/im?p=@' . $row['user'] . '">' . $row['user'] . '</a>: "' . $row['input_text'] . '" -> "' . $row['output_text'] . '"';
     }
 
     return $output;
