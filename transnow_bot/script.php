@@ -74,7 +74,7 @@ switch ($inputLangCode) {
         break;
     default:
         $outputLangCode = 'error';
-        addLookup($username, $message, $outputLangCode);
+        addLookup($username, $message, $outputLangCode, $chat_id);
         sendMessage($chat_id, 'Incorrect input language! Please, try again.');
         exit();
 }
@@ -98,7 +98,7 @@ if (!empty($trcheck)) {
     addArticle($message, $output_json, $outputLangCode);
     $output_text = sendDetailedOutput($output_json, $inputLangCode);
 }
-addLookup($username, $message, $outputLangCode);
+addLookup($username, $message, $outputLangCode, $chat_id);
 sendMessage($chat_id, $output_text);
 
 // Функции
@@ -164,15 +164,16 @@ function addArticle($input_text, $article, $lang_code)
 }
 
 // Добавление данных о поиске
-function addLookup($user, $input_text, $lang_code)
+function addLookup($user, $input_text, $lang_code, $chat_id)
 {
     $output_text = '';
     $db = db();
-    $stmt = $db->prepare('INSERT INTO lookup (user, input_text, lang_code, date, output_text) VALUES (:user, :input_text, :lang_code, NOW(), :output_text)');
+    $stmt = $db->prepare('INSERT INTO lookup (user, input_text, lang_code, date, output_text) VALUES (:user, :input_text, :lang_code, NOW(), :output_text, :chat_id)');
     $stmt->bindParam(':user', $user);
     $stmt->bindParam(':input_text', $input_text);
     $stmt->bindParam(':lang_code', $lang_code);
     $stmt->bindParam(':output_text', $output_text);
+    $stmt->bindParam(':chat_id', $chat_id);
     $stmt->execute();
 }
 
