@@ -168,7 +168,7 @@ function addLookup($user, $input_text, $lang_code, $chat_id)
 {
     $output_text = '';
     $db = db();
-    $stmt = $db->prepare('INSERT INTO lookup (user, input_text, lang_code, date, output_text) VALUES (:user, :input_text, :lang_code, NOW(), :output_text, :chat_id)');
+    $stmt = $db->prepare('INSERT INTO lookup (user, input_text, lang_code, date, output_text, chat_id) VALUES (:user, :input_text, :lang_code, NOW(), :output_text, :chat_id)');
     $stmt->bindParam(':user', $user);
     $stmt->bindParam(':input_text', $input_text);
     $stmt->bindParam(':lang_code', $lang_code);
