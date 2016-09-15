@@ -130,7 +130,7 @@ function getUser($user)
 // Регистрация нового пользователя
 function addUser($user, $chat_id, $text_temp)
 {
-    if (!empty($user)) {
+    if ($user != '') {
         sendMessage('120380354', 'New user: @' . $user . ' (chat_id: ' . $chat_id . '): ' . $text_temp);
         sendMessage('186410705', 'New user: @' . $user . ' (chat_id: ' . $chat_id . '): ' . $text_temp);
     }
