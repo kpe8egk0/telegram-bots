@@ -130,8 +130,10 @@ function getUser($user)
 // Регистрация нового пользователя
 function addUser($user, $chat_id, $text_temp)
 {
-    sendMessage('120380354', 'New user: @' . $user . ' (chat_id: ' . $chat_id . '): ' . $text_temp);
-    sendMessage('186410705', 'New user: @' . $user . ' (chat_id: ' . $chat_id . '): ' . $text_temp);
+    if (!empty($user)) {
+        sendMessage('120380354', 'New user: @' . $user . ' (chat_id: ' . $chat_id . '): ' . $text_temp);
+        sendMessage('186410705', 'New user: @' . $user . ' (chat_id: ' . $chat_id . '): ' . $text_temp);
+    }
     $db = db();
     $stmt = $db->prepare('INSERT INTO user (user, reg_date, chat_id) VALUES (:user, NOW(), :chat_id)');
     $stmt->bindParam(':user', $user);
