@@ -74,7 +74,7 @@ switch ($inputLangCode) {
         break;
     default:
         $outputLangCode = 'error';
-        addLookup($username, $message, $outputLangCode, $output_text);
+        addLookup($username, $message, $outputLangCode);
         sendMessage($chat_id, 'Incorrect input language! Please, try again.');
         exit();
 }
