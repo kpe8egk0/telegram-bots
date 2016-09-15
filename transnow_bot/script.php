@@ -11,6 +11,8 @@ $yandex_dict_key = 'dict.1.1.20160819T080857Z.a21f9f5c92e0e7b9.ab24906e2b9b24a62
 
 //Доступ к переводчику Яндекса
 $yandex_trans_key = 'trnsl.1.1.20160906T144940Z.7b9bdff453462ecd.bcabb5b47a3afe432e57931793362ad73e47898f';
+//                  trnsl.1.1.20160915T101843Z.23f4f4f9a49ef152.2df7f38f5c1a42de6b016ea96c9f948afea7b165
+//                  trnsl.1.1.20160819T052918Z.0a516c1803ca0f75.0ac446a379fd1937830636a1c21da24f3308fde6
 
 $input = json_decode(file_get_contents('php://input'), TRUE);
 
