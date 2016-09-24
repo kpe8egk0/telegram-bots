@@ -1,2 +1,2 @@
 #!/bin/bash
-#php ${OPENSHIFT_REPO_DIR}transnow_bot/crontest.php
+php ${OPENSHIFT_REPO_DIR}transnow_bot/crontest.php
