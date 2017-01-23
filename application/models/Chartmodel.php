@@ -24,6 +24,3 @@ class ChartModel extends CI_Model {
     }
 
 }
-
-/* End of file chartmodel.php */
-/* Location: ./application/models/chartmodel.php */

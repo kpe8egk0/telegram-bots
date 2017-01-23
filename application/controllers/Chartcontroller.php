@@ -13,7 +13,10 @@ class ChartController extends CI_Controller {
     }
 
     public function index() {
-        $this->load->view('welcome_message');//, $data);
+        $this->load->model('chartmodel');
+        $results = $this->chartmodel->get_chart_data();
+        $data['chart_data'] = $results;
+        $this->load->view('chart', $data);//, $data);
     }
 
 }
