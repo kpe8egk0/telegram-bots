@@ -13,7 +13,7 @@ class ChartModel extends CI_Model {
     private $performance = 'performance';
 
     function __construct() {
-
+        $this->load->database();
     }
 
     function get_chart_data() {
