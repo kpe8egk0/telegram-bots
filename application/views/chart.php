@@ -4,10 +4,10 @@
     <meta charset="UTF-8"/>
     <title>test</title>
     <!-- Load Google chart api -->
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
-        google.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
                 ['Date', 'Reqs'],
