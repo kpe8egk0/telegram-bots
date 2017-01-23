@@ -8,9 +8,8 @@ if (!defined('BASEPATH'))
 class ChartController extends CI_Controller {
 
     public function index() {
-        //$this->load->model('chartmodel');
-        //$results = $this->chartmodel->get_chart_data();
-        $results['chart_data'] = array(array('day' => '1', 'qty' => 6), array('day' => '2', 'qty' => 3));
+        $this->load->model('chartmodel');
+        $results = $this->chartmodel->get_chart_data();
         $data['chart_data'] = $results['chart_data'];
         $this->load->view('chart', $data);//, $data);
     }
