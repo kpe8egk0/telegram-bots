@@ -32,5 +32,6 @@
 </head>
 <body>
 <div id="curve_chart" style="width: 900px; height: 500px"></div>
+<?php var_dump($chart_data)?>
 </body>
 </html>
