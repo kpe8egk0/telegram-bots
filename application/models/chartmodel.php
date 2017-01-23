@@ -23,7 +23,7 @@ class ChartModel extends CI_Model {
         $stmt->execute();
         $results['chart_data'] = $stmt->fetchAll();
         */
-        $results['chart_data'] = array(array('day' => '1', 'qty' => 6), array('day' => '2', 'qty' => 3));
+        $results['chart_data'] = array('0' => array('day' => '1', 'qty' => 6), '1' => array('day' => '2', 'qty' => 3));
 
         return $results;
     }
