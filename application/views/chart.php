@@ -6,7 +6,7 @@
     <!-- Load Google chart api -->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-        google.load("visualization", "1.1", {packages: ["bar"]});
+        google.charts.load('current', {'packages':['corechart']});
         google.setOnLoadCallback(drawChart);
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
@@ -25,13 +25,13 @@
                 }
             };
 
-            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+            var chart = new google.charts.Bar(document.getElementById('curve_chart'));
 
             chart.draw(data, options);
         }
     </script>
 </head>
 <body>
-<div id="columnchart_material" style="width: 900px; height: 500px;"></div>
+<div id="curve_chart" style="width: 900px; height: 500px"></div>
 </body>
 </html>
