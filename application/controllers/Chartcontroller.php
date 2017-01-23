@@ -14,8 +14,8 @@ class ChartController extends CI_Controller {
     }
 
     public function index() {
-        $results = $this->chart->get_chart_data();
-        $data['chart_data'] = $results['chart_data'];
+        //$results = $this->chart->get_chart_data();
+        //$data['chart_data'] = $results['chart_data'];
         $this->load->view('chart', $data);
     }
 

@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title></title>
-    <!-- Load Google chart api -->
+    <title>test</title>
+    <!-- Load Google chart api
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
         google.load("visualization", "1.1", {packages: ["bar"]});
@@ -29,7 +29,7 @@
 
             chart.draw(data, options);
         }
-    </script>
+    </script>-->
 </head>
 <body>
 <div id="columnchart_material" style="width: 900px; height: 500px;"></div>
