@@ -9,11 +9,11 @@ class ChartController extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model('chartmodel');
+        $this->load->model('chartmodel', 'chart');
     }
 
     public function index() {
-        $results = $this->chartmodel->get_chart_data();
+        $results = $this->chart->get_chart_data();
         $data['chart_data'] = $results['chart_data'];
         $this->load->view('chart', $data);
     }
