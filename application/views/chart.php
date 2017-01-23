@@ -19,13 +19,12 @@
             ]);
 
             var options = {
-                chart: {
-                    title: 'Reqs per Date',
-                    subtitle: 'todo:',
-                }
+                title: 'Company Performance',
+                curveType: 'function',
+                legend: { position: 'bottom' }
             };
 
-            var chart = new google.charts.Bar(document.getElementById('curve_chart'));
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
             chart.draw(data, options);
         }
