@@ -18,9 +18,13 @@ class ChartModel extends CI_Model {
 
     function get_chart_data() {
 
-        $query = $this->db->get_where('lookup', array('lang_code' => 'en-ru'));
+        $db = db();
+        $stmt = $db->prepare('SELECT date(date) as day, COUNT(id) AS qty FROM lookup GROUP BY date(date) DESC');
+        $stmt->execute();
 
-        return $query->result();
+        $results['chart_data'] = $stmt->execute();
+
+        return $results;
     }
 
 }
