@@ -7,13 +7,8 @@ if (!defined('BASEPATH'))
  */
 class ChartController extends CI_Controller {
 
-
-    function __construct() {
-        parent::__construct();
-        $this->load->model('chartmodel');
-    }
-
     public function index() {
+        $this->load->model('chartmodel');
         $results = $this->chartmodel->get_chart_data();
         $data['chart_data'] = $results['chart_data'];
         $this->load->view('chart', $data);//, $data);
