@@ -10,7 +10,7 @@ class ChartController extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        //$this->load->model('chartmodel', 'chart');
+        $this->load->model('chartmodel');
     }
 
     public function index() {
