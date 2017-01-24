@@ -20,7 +20,7 @@
             ]);
 
             var options = {
-                title: 'Company Performance',
+                title: 'Transnow Statistics',
                 curveType: 'none',
                 legend: { position: 'bottom' }
             };
