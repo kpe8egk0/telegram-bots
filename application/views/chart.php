@@ -1,27 +1,3 @@
-<?php
-function JSdate($in,$type){
-    if($type=='date'){
-        //Dates are patterned 'yyyy-MM-dd'
-        preg_match('/(\d{4})-(\d{2})-(\d{2})/', $in, $match);
-    } elseif($type=='datetime'){
-        //Datetimes are patterned 'yyyy-MM-dd hh:mm:ss'
-        preg_match('/(\d{4})-(\d{2})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})/', $in, $match);
-    }
-
-    $year = (int) $match[1];
-    $month = (int) $match[2] - 1; // Month conversion between indexes
-    $day = (int) $match[3];
-
-    if ($type=='date'){
-        return "Date($year, $month, $day)";
-    } elseif ($type=='datetime'){
-        $hours = (int) $match[4];
-        $minutes = (int) $match[5];
-        $seconds = (int) $match[6];
-        return "Date($year, $month, $day, $hours, $minutes, $seconds)";
-    }
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,9 +12,9 @@ function JSdate($in,$type){
             var data = google.visualization.arrayToDataTable([
                 ['Date', 'Reqs'],
                 <?php
-                    foreach ($chart_data as $data) {
-                        echo '[' . $data->day . ',' . $data->qty . '],';
-                    }
+                foreach ($chart_data as $data) {
+                    echo '[' . $data->day . ',' . $data->qty . '],';
+                }
                 ?>
             ]);
 
