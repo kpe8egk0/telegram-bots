@@ -38,7 +38,8 @@ function JSdate($in,$type){
                 <?php
                     $i = 0;
                     foreach ($chart_data as $data) {
-                        echo "['" . $i++ . "'," . $data->qty . '],';
+                        echo "['" . $i . "'," . $data->qty . '],';
+                        $i++;
                     }
                 ?>
             ]);
