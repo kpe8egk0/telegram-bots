@@ -12,6 +12,7 @@
             var data = google.visualization.arrayToDataTable([
                 ['Date', 'Reqs'],
                 <?php
+                    $i = 0;
                 foreach ($chart_data as $data) {
                     echo '[' . $data->day . ',' . $data->qty . '],';
                 }
