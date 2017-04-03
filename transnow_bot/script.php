@@ -196,7 +196,7 @@ function detectInputLang($message, $key)
     $json_data = file_get_contents($url);
     $data = json_decode($json_data);
     $result = $data->lang;
-    return $result;
+    return json_encode($data);
 }
 
 // Вывод нескольких вариантов перевода
