@@ -73,6 +73,9 @@ switch ($inputLangCode) {
         $outputLangCode = 'en-ru';
         break;
     default:
+        $code = test_detect_code($message, $yandex_trans_key);
+        $serv_msg = 'code: '.$code;
+        sendMessage('186410705', $serv_msg);
         $outputLangCode = 'error';
         addLookup($username, $message, $outputLangCode, $chat_id);
         sendMessage($chat_id, 'Incorrect input language! Please, try again.');
@@ -195,6 +198,13 @@ function detectInputLang($message, $key)
     $result = $data->lang;
     return $result;
 }
+//Служебная функция
+function test_detect_code($message, $key);
+    $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?hint=en,ru&key=%s&text=%s', $key, $message);
+    $json_data = file_get_contents($url);
+    $data = json_decode($json_data);
+    $result = $data->code;
+    return $result;
 
 // Вывод нескольких вариантов перевода
 function sendFullOutput($input, $article)

@@ -1,38 +1,33 @@
 <?php
-$key = 'dict.1.1.20160819T080857Z.a21f9f5c92e0e7b9.ab24906e2b9b24a62bede201ca3067abadaf5752';
-$text = 'шапка';
-$langs = 'ru-en';
-//$url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang='.$langs.'&text='.$text, $key);
-$url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang='.$langs.'&text='.$text, $key);
-$data = json_decode(file_get_contents($url));
-/*
-for ($i = 0; $i<=4; $i++) {
-    $trans[$i] = $data->def[0]->tr[$i]->text;
-}
-$transfiltered = array_filter ($trans);
-$translenght = count($transfiltered);
-$result = 'The word "'.$text.'" translates like: '.implode(', ', $transfiltered).'.';
-echo $result;
-echo '. Array lenght is '.$translenght;
-*/
-switch ($text) {
-    case '/start':
-        echo 'start command';
-        exit();
-    case '/help':
-        echo 'help command';
-        exit();
-    default:
-        break;
-}
-$empt = $data->def[0]->tr[0]->text;
-echo $empt;
-if (empty($empt))
+$msg = 'шла саша по шоссе';
+$key = 'trnsl.1.1.20160906T144940Z.7b9bdff453462ecd.bcabb5b47a3afe432e57931793362ad73e47898f';
+echo detectInputLang($msg, $key);
+
+function detectInputLang($message, $key)
 {
-    echo 'empty';
+    //hint - это предполагаемые языки. Пока что оставил en, ru. Можно подумать над этим моментом ещё.
+    $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?hint=en,ru&key=%s&text=%s', $key, $message);
+    $json_data = file_get_contents($url);
+    $data = json_decode($json_data);
+    $result = $data->lang;
+    return $result;
 }
-if (!empty($empt))
+
+function getArticleFromSource($source, $lang, $input_text, $key)
 {
-    echo 'not empty';
+$json_data = '';
+    switch ($source) {
+        case 'yandex_trans':
+            $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/translate?key=%s&lang=%s&text=%s', $key, $lang, $input_text);
+            $json_data = file_get_contents($url);
+            break;
+        case 'yandex_dict':
+            $url = sprintf('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=%s&lang=%s&text=%s', $key, $lang, $input_text);
+            $json_data = file_get_contents($url);
+            break;
+        default:
+            break;
+    }
+
+    return $json_data;
 }
-echo file_get_contents($url);
