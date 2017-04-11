@@ -59,7 +59,7 @@ switch ($message) {
         exit();
         //ОСТОРОЖНО! Отсылает сообщение $message Всем пользователям из таблицы user!
     case '/admin_send_to_all_code!@#3647584943568':
-        $chat_ids = get_chat_id();
+        $chat_ids = get_chat_ids();
         $msg_to_all = 'Друзья, просим прощения за технические неполадки в работе нашего бота. Мы всё наладили и переводом снова можно пользоваться без всяких "Incorrect input language! Please, try again." ;) В случае каких-либо вопросов, или проблем, пишите нам по адресу transnowapplication@gmail.com';
         foreach ($chat_ids as $ids)
         sendMessage($ids['ids'], $msg_to_all);
@@ -225,10 +225,10 @@ function test_detect_json($message, $key)
    // $data = json_decode($json_data);
     return $url;
 }
-function get_chat_id()
+function get_chat_ids()
 {
     $db = db();
-    $stmt = $db->prepare('SELECT chat_id as ids FROM user');
+    $stmt = $db->prepare('SELECT chat_id as ids FROM user LIMIT 1000000000000');
     $stmt->execute();
     $row = $stmt->fetchAll();
     return $row;
