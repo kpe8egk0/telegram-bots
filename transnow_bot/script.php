@@ -58,8 +58,11 @@ switch ($message) {
         sendMessage($chat_id, 'Привет, %username%!');
         exit();
     case '/admin_chat_id':
-        $chat_ids = print_r(get_chat_id());
-        sendMessage('186410705', $chat_ids);
+        $chat_ids = get_chat_id();
+        foreach ($chat_ids as &$ids)
+        {
+            sendMessage('186410705', $ids);
+        }
         exit();
     default:
         break;
@@ -225,10 +228,10 @@ function test_detect_json($message, $key)
 function get_chat_id()
 {
     $db = db();
-    $stmt = $db->prepare('SELECT chat_id FROM user WHERE reg_date > 0 LIMIT 30');
+    $stmt = $db->prepare('SELECT chat_id as ids FROM user LIMIT 5');
     $stmt->execute();
-    //$row = $stmt->fetch();
-    return $stmt;
+    $row = $stmt->fetch();
+    return $row;
 }
 
 // Вывод нескольких вариантов перевода
