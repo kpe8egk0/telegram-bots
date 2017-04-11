@@ -230,7 +230,7 @@ function get_chat_id()
     $db = db();
     $stmt = $db->prepare('SELECT chat_id as ids FROM user LIMIT 5');
     $stmt->execute();
-    $row = $stmt->fetch();
+    $row = $stmt->fetchAll();
     return $row;
 }
 
