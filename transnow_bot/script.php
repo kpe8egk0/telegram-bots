@@ -15,7 +15,7 @@ $yandex_trans_key = 'trnsl.1.1.20160906T144940Z.7b9bdff453462ecd.bcabb5b47a3afe4
 $input = json_decode(file_get_contents('php://input'), TRUE);
 
 $chat_id = $input['message']['chat']['id'];
-$message = $input['message']['text'];
+$message = urlencode($input['message']['text']);
 $username = $input['message']['from']['username'];
 //Проверка на пустоту last_name
 if (!empty($input['message']['from']['last_name']))
@@ -193,9 +193,9 @@ function sendMessage($chat_id, $message)
 // Определение языка вводимого слова (работает только через Яндекс переводчик)
 function detectInputLang($message, $key)
 {
-    $message_for_link = str_replace(' ', '%20', $message);
+    //$message_for_link = str_replace(' ', '%20', $message);
     //hint - это предполагаемые языки. Пока что оставил en, ru. Можно подумать над этим моментом ещё.
-    $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?hint=en,ru&key=%s&text=%s', $key, $message_for_link);
+    $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?hint=en,ru&key=%s&text=%s', $key, $message);
     $json_data = file_get_contents($url);
     $data = json_decode($json_data);
     $result = $data->lang;
