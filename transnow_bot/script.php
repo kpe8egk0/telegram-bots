@@ -74,7 +74,7 @@ switch ($inputLangCode) {
         break;
     default:
         $code = test_detect_code($message, $yandex_trans_key);
-        $serv_msg = 'code: '.$code;
+        $serv_msg = 'code: '.$code. 'detected lang: '.$inputLangCode;
         sendMessage('186410705', $serv_msg);
         $outputLangCode = 'error';
         addLookup($username, $message, $outputLangCode, $chat_id);
