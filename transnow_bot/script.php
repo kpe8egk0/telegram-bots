@@ -199,7 +199,7 @@ function detectInputLang($message, $key)
     return $result;
 }
 //Служебная функция
-function test_detect_code($message, $key);
+function test_detect_code($message, $key)
 {
     $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?hint=en,ru&key=%s&text=%s', $key, $message);
     $json_data = file_get_contents($url);
