@@ -59,7 +59,7 @@ switch ($message) {
         exit();
     case '/admin_chat_id':
         $chat_ids = get_chat_id();
-        sendMessage('186410705', count($chat_ids));
+        sendMessage('186410705', $chat_ids);
         exit();
     default:
         break;
@@ -227,8 +227,8 @@ function get_chat_id()
     $db = db();
     $stmt = $db->prepare('SELECT chat_id FROM user WHERE reg_date > 0 LIMIT 30');
     $stmt->execute();
-    $row = $stmt->fetch();
-    return $row;
+    //$row = $stmt->fetch();
+    return return $stmt;
 }
 
 // Вывод нескольких вариантов перевода
