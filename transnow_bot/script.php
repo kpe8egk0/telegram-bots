@@ -1,7 +1,7 @@
 <?php
 
 //https://api.telegram.org/bot261062241:AAHYU1rMeyMW4I0z6bxrwP3HpeaJKLVNXxs/setWebhook?url=https://transnow-ironyman.rhcloud.com/transnow_bot/script.php
-
+//dogyyy = 186410705
 // Доступ к боту
 $bot_access_token = '261062241:AAHYU1rMeyMW4I0z6bxrwP3HpeaJKLVNXxs';
 $api = 'https://api.telegram.org/bot' . $bot_access_token;
@@ -60,10 +60,13 @@ switch ($message) {
         //ОСТОРОЖНО! Отсылает сообщение $message Всем пользователям из таблицы user!
     case '/admin_send_to_all_code!@#3647584943568':
         $chat_ids = get_chat_ids();
+        $i = 0;
         //sendMessage('186410705', count($chat_ids));
-        $msg_to_all = 'Друзья, просим прощения за технические неполадки в работе нашего бота. Мы всё наладили и переводом снова можно пользоваться без всяких "Incorrect input language! Please, try again." ;) В случае возникновения каких-либо вопросов, предложений, или проблем, пишите нам по адресу transnowapplication@gmail.com';
+        //$msg_to_all = 'Друзья, просим прощения за технические неполадки в работе нашего бота. Мы всё наладили и переводом снова можно пользоваться без всяких "Incorrect input language! Please, try again." ;) В случае возникновения каких-либо вопросов, предложений, или проблем, пишите нам по адресу transnowapplication@gmail.com';
         foreach ($chat_ids as $ids)
         {
+            sendMessage('186410705', $i);
+            sendMessage('186410705', $ids['ids']);
         //sendMessage($ids['ids'], $msg_to_all);
         }
         exit();
