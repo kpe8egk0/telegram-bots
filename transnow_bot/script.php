@@ -75,7 +75,7 @@ switch ($inputLangCode) {
     default:
         $code = test_detect_code($message, $yandex_trans_key);
         $test_json = test_detect_json($message, $yandex_trans_key);
-        $serv_msg = 'code: '.$code. 'detected lang: '.$inputLangCode.' test json = '.$test_json;
+        $serv_msg = 'code: '.$code. 'detected lang: '.$inputLangCode.' test json = '.json_encode($test_json);
         sendMessage('186410705', $serv_msg);
         $outputLangCode = 'error';
         addLookup($username, $message, $outputLangCode, $chat_id);
