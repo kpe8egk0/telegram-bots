@@ -15,7 +15,7 @@ $yandex_trans_key = 'trnsl.1.1.20160906T144940Z.7b9bdff453462ecd.bcabb5b47a3afe4
 $input = json_decode(file_get_contents('php://input'), TRUE);
 
 $chat_id = $input['message']['chat']['id'];
-$message = $input['message']['text']);
+$message = $input['message']['text'];
 $username = $input['message']['from']['username'];
 //Проверка на пустоту last_name
 if (!empty($input['message']['from']['last_name']))
@@ -63,7 +63,7 @@ switch ($message) {
 
 
 // Определение языка ввода и языковогокода перевода
-$message = urlencode($input['message']['text']);
+$message = urlencode($message);
 $outputLangCode = '';
 $inputLangCode = detectInputLang($message, $yandex_trans_key);
 switch ($inputLangCode) {
