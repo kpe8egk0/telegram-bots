@@ -192,7 +192,7 @@ function sendMessage($chat_id, $message)
 function detectInputLang($message, $key)
 {
     //hint - это предполагаемые языки. Пока что оставил en, ru. Можно подумать над этим моментом ещё.
-    $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?hint=en,ru&key=%s&text=%s', $key, $message);
+    $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?key=%s&text=%s', $key, $message);
     $json_data = file_get_contents($url);
     $data = json_decode($json_data);
     $result = $data->lang;
@@ -201,7 +201,7 @@ function detectInputLang($message, $key)
 //Служебная функция
 function test_detect_code($message, $key)
 {
-    $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?hint=en,ru&key=%s&text=%s', $key, $message);
+    $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?key=%s&text=%s', $key, $message);
     $json_data = file_get_contents($url);
     $data = json_decode($json_data);
     $result = $data->code;
