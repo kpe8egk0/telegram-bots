@@ -66,6 +66,7 @@ switch ($message) {
         foreach ($chat_ids as $ids)
         {
             sendMessage('186410705', $i);
+            $i++;
             sendMessage('186410705', $ids['ids']);
         //sendMessage($ids['ids'], $msg_to_all);
         }
