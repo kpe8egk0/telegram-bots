@@ -60,9 +60,12 @@ switch ($message) {
         //ОСТОРОЖНО! Отсылает сообщение $message Всем пользователям из таблицы user!
     case '/admin_send_to_all_code!@#3647584943568':
         $chat_ids = get_chat_ids();
+        sendMessage('186410705', count($chat_ids));
+        /*
         $msg_to_all = 'Друзья, просим прощения за технические неполадки в работе нашего бота. Мы всё наладили и переводом снова можно пользоваться без всяких "Incorrect input language! Please, try again." ;) В случае каких-либо вопросов, или проблем, пишите нам по адресу transnowapplication@gmail.com';
         foreach ($chat_ids as $ids)
         sendMessage($ids['ids'], $msg_to_all);
+        */
         exit();
     default:
         break;
