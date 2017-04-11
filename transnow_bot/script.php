@@ -225,7 +225,7 @@ function test_detect_json($message, $key)
 function get_chat_id()
 {
     $db = db();
-    $stmt = $db->prepare('SELECT chat_id as id from user LIMIT 20');
+    $stmt = $db->prepare('SELECT chat_id from user');
     $stmt->execute();
     $row = $stmt->fetch();
     return $row;
