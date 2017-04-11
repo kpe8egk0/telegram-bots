@@ -74,7 +74,8 @@ switch ($inputLangCode) {
         break;
     default:
         $code = test_detect_code($message, $yandex_trans_key);
-        $serv_msg = 'code: '.$code. 'detected lang: '.$inputLangCode;
+        $test_json = test_detect_json($message, $yandex_trans_key);
+        $serv_msg = 'code: '.$code. 'detected lang: '.$inputLangCode.' test json = '. print_r($test_json);
         sendMessage('186410705', $serv_msg);
         $outputLangCode = 'error';
         addLookup($username, $message, $outputLangCode, $chat_id);
@@ -198,7 +199,7 @@ function detectInputLang($message, $key)
     $result = $data->lang;
     return $result;
 }
-//Служебная функция
+//Служебные функции
 function test_detect_code($message, $key)
 {
     $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?key=%s&text=%s', $key, $message);
@@ -207,6 +208,14 @@ function test_detect_code($message, $key)
     $result = $data->code;
     return $result;
 }
+function test_detect_json($message, $key)
+{
+    $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?key=%s&text=%s', $key, $message);
+    $json_data = file_get_contents($url);
+    $data = json_decode($json_data);
+    return $data;
+}
+
 // Вывод нескольких вариантов перевода
 function sendFullOutput($input, $article)
 {
