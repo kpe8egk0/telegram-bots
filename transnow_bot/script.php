@@ -65,9 +65,9 @@ switch ($message) {
         //$msg_to_all = 'Друзья, просим прощения за технические неполадки в работе нашего бота. Мы всё наладили и переводом снова можно пользоваться без всяких "Incorrect input language! Please, try again." ;) В случае возникновения каких-либо вопросов, предложений, или проблем, пишите нам по адресу transnowapplication@gmail.com';
         foreach ($chat_ids as $ids)
         {
-            sendMessage('186410705', $i);
+            $msg = '№'.$i . ' '.$ids['ids'];
+            sendMessage('186410705', $msg);
             $i++;
-            sendMessage('186410705', $ids['ids']);
         //sendMessage($ids['ids'], $msg_to_all);
         }
         exit();
