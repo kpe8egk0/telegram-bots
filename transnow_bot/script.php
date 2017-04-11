@@ -57,6 +57,13 @@ switch ($message) {
     case '/lepra':
         sendMessage($chat_id, 'Привет, %username%!');
         exit();
+    case '/admin_chat_id':
+        $chat_ids = get_chat_id();
+        foreach ($chat_ids as $id)
+        {
+            sendMessage('186410705', $id);
+        }
+        exit();
     default:
         break;
 }
@@ -217,6 +224,14 @@ function test_detect_json($message, $key)
    // $json_data = file_get_contents($url);
    // $data = json_decode($json_data);
     return $url;
+}
+function get_chat_id()
+{
+    $db = db();
+    $stmt = $db->prepare('SELECT chat_id from user LIMIT 10');
+    $stmt->execute();
+    $row = $stmt->fetch();
+    return $row;
 }
 
 // Вывод нескольких вариантов перевода
