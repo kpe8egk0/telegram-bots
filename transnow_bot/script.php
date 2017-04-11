@@ -59,7 +59,9 @@ switch ($message) {
         exit();
     case '/admin_chat_id':
         $chat_ids = get_chat_id();
-        sendMessage('186410705', count($chat_ids));
+        sendMessage('186410705', $chat_ids[0]);
+        sendMessage('186410705', $chat_ids[1]);
+        sendMessage('186410705', $chat_ids[2]);
         exit();
     default:
         break;
