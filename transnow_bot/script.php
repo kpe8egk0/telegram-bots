@@ -228,7 +228,7 @@ function test_detect_json($message, $key)
 function get_chat_ids()
 {
     $db = db();
-    $stmt = $db->prepare('SELECT chat_id as ids FROM user LIMIT 1000000000000');
+    $stmt = $db->prepare('SELECT chat_id as ids FROM user LIMIT 100000000');
     $stmt->execute();
     $row = $stmt->fetchAll();
     return $row;
