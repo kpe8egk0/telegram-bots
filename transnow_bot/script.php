@@ -58,10 +58,8 @@ switch ($message) {
         sendMessage($chat_id, 'Привет, %username%!');
         exit();
     case '/admin_chat_id':
-        $chat_ids = get_chat_id();
-        sendMessage('186410705', $chat_ids[0]);
-        sendMessage('186410705', $chat_ids[1]);
-        sendMessage('186410705', $chat_ids[2]);
+        $chat_ids = var_dump(get_chat_id());
+        sendMessage('186410705', $chat_ids);
         exit();
     default:
         break;
