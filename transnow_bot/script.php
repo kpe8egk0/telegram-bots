@@ -57,7 +57,7 @@ switch ($message) {
     case '/lepra':
         sendMessage($chat_id, 'Привет, %username%!');
         exit();
-        //ОСТОРОЖНО! Отсылает сообщение $message Всем пользователям из таблицы user!
+    //ОСТОРОЖНО! Отсылает сообщение $message Всем пользователям из таблицы user!
     case '/admin_send_to_all_code!@#3647584943568':
         $chat_ids = get_chat_ids();
         $i = 0;
@@ -65,10 +65,10 @@ switch ($message) {
         //$msg_to_all = 'Друзья, просим прощения за технические неполадки в работе нашего бота. Мы всё наладили и переводом снова можно пользоваться без всяких "Incorrect input language! Please, try again." ;) В случае возникновения каких-либо вопросов, предложений, или проблем, пишите нам по адресу transnowapplication@gmail.com';
         foreach ($chat_ids as $ids)
         {
-            $msg = $i .', chat_id = '.$ids['ids'];
-            sendMessage('186410705', $msg);
+            sendMessage('186410705', $i);
             $i++;
-        //sendMessage($ids['ids'], $msg_to_all);
+            sendMessage('186410705', $ids['ids']);
+            //sendMessage($ids['ids'], $msg_to_all);
         }
         exit();
     default:
@@ -228,8 +228,8 @@ function test_detect_code($message, $key)
 function test_detect_json($message, $key)
 {
     $url = sprintf('https://translate.yandex.net/api/v1.5/tr.json/detect?key=%s&text=%s', $key, $message);
-   // $json_data = file_get_contents($url);
-   // $data = json_decode($json_data);
+    // $json_data = file_get_contents($url);
+    // $data = json_decode($json_data);
     return $url;
 }
 function get_chat_ids()
