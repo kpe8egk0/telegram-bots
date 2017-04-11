@@ -228,7 +228,7 @@ function get_chat_id()
     $stmt = $db->prepare('SELECT chat_id FROM user WHERE reg_date > 0 LIMIT 30');
     $stmt->execute();
     //$row = $stmt->fetch();
-    return return $stmt;
+    return $stmt;
 }
 
 // Вывод нескольких вариантов перевода
