@@ -1,2 +1,2 @@
 #!/bin/bash
-php ${OPENSHIFT_REPO_DIR}transnow_bot/send_to_all.php
+#php ${OPENSHIFT_REPO_DIR}transnow_bot/send_to_all.php
