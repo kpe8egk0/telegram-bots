@@ -6,7 +6,6 @@ $api = 'https://api.telegram.org/bot' . $bot_access_token;
 
 //Отправка
 $chat_ids = get_chat_ids();
-$i = 0;
 //sendMessage('186410705', count($chat_ids));
 //$msg_to_all = 'Друзья, просим прощения за технические неполадки в работе нашего бота. Мы всё наладили и переводом снова можно пользоваться без всяких "Incorrect input language! Please, try again." ;) В случае возникновения каких-либо вопросов, предложений, или проблем, пишите нам по адресу transnowapplication@gmail.com';
 foreach ($chat_ids as $ids)
