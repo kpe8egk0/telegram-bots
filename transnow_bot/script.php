@@ -46,18 +46,18 @@ if ($user['chat_id'] != $chat_id) {
 $message = strtolower($message);
 switch ($message) {
     case '/start':
-        sendMessage($chat_id, 'Привет! Чтобы начать, пожалуйста, напиши любое слово или предложение для перевода на русском или английском языке. Hi there! To start please write any word or sentence for translation in russian or english!');
+        sendMessage($chat_id, 'Привет! Чтобы начать, пожалуйста, напиши любое слово или предложение для перевода на русском или английском языке. В случае возникновения каких-либо вопросов, предложений или проблем, пишите нам @transnowsupport или по адресу transnowapplication@gmail.com Hi there! To start please write any word or sentence for translation in russian or english! Should you have any questions, proposals or problems, please do not hesitate to contact us @transnowsupport or transnowapplication@gmail.com');
         exit();
     case '/help_ru':
-        sendMessage($chat_id, 'Этот бот может помочь тебе с переводом слова или предложения с русского на английский и наоборот. Просто напиши слово или предложение на нужном языке и получишь перевод.');
+        sendMessage($chat_id, 'Этот бот может помочь тебе с переводом слова или предложения с русского на английский и наоборот. Просто напиши слово или предложение на нужном языке и получишь перевод. В случае возникновения каких-либо вопросов, предложений или проблем, пишите нам @transnowsupport или по адресу transnowapplication@gmail.com');
         exit();
     case '/help_en':
-        sendMessage($chat_id, 'This bot can help you to translate some word or a sentence from russian to english and conversely. You just need to write the word or sentence using the language you need.');
+        sendMessage($chat_id, 'This bot can help you to translate some word or a sentence from russian to english and conversely. You just need to write the word or sentence using the language you need. Should you have any questions, proposals or problems, please do not hesitate to contact us @transnowsupport or transnowapplication@gmail.com');
         exit();
     case '/lepra':
         sendMessage($chat_id, 'Привет, %username%!');
         exit();
-    //ОСТОРОЖНО! Отсылает сообщение $message Всем пользователям из таблицы user!
+    /*ОСТОРОЖНО! Отсылает сообщение $message Всем пользователям из таблицы user!
     case '/admin_send_to_all_code!@#3647584943568':
         $chat_ids = get_chat_ids();
         $i = 0;
@@ -70,7 +70,7 @@ switch ($message) {
             sendMessage('186410705', $ids['ids']);
             //sendMessage($ids['ids'], $msg_to_all);
         }
-        exit();
+        exit();*/
     default:
         break;
 }
