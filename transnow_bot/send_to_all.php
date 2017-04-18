@@ -8,14 +8,21 @@ $api = 'https://api.telegram.org/bot' . $bot_access_token;
 $chat_ids = get_chat_ids();
 //sendMessage('186410705', count($chat_ids));
 //$msg_to_all = 'Друзья, просим прощения за технические неполадки в работе нашего бота. Мы всё наладили и переводом снова можно пользоваться без всяких "Incorrect input language! Please, try again." ;) В случае возникновения каких-либо вопросов, предложений, или проблем, пишите нам по адресу transnowapplication@gmail.com';
-foreach ($chat_ids as $ids)
+if (!empty($chat_ids))
 {
-    sendMessage('186410705', $ids['ids']);
-    sendMessage('120380354', $ids['ids']);
-    update_flag($ids['ids']);
-    //sendMessage($ids['ids'], $msg_to_all);
+    foreach ($chat_ids as $ids)
+    {
+        sendMessage('186410705', $ids['ids']);
+        sendMessage('120380354', $ids['ids']);
+        update_flag($ids['ids']);
+        //sendMessage($ids['ids'], $msg_to_all);
+    }
 }
-
+else
+{
+    sendMessage('186410705', 'empty ids test');
+    sendMessage('120380354', 'empty ids test');
+}
 //Функции
 // Базовая функция доступа к БД
 function db()
@@ -34,7 +41,7 @@ function db()
 function get_chat_ids()
 {
     $db = db();
-    $stmt = $db->prepare('SELECT chat_id as ids FROM user WHERE sent_flag = 0 LIMIT 20');
+    $stmt = $db->prepare('SELECT chat_id as ids FROM user WHERE sent_flag = 1 LIMIT 20');
     $stmt->execute();
     $row = $stmt->fetchAll();
     return $row;
