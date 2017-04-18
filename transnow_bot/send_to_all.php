@@ -41,7 +41,7 @@ function db()
 function get_chat_ids()
 {
     $db = db();
-    $stmt = $db->prepare('SELECT chat_id as ids FROM user WHERE sent_flag = 1 LIMIT 20');
+    $stmt = $db->prepare('SELECT chat_id as ids FROM user WHERE sent_flag = 0 LIMIT 20');
     $stmt->execute();
     $row = $stmt->fetchAll();
     return $row;
