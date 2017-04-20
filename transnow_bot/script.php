@@ -101,7 +101,7 @@ switch ($inputLangCode) {
         }
         else
         {
-            sendMessage($chat_id, 'Language detection error! Please try again using English or Russian. Ошибка определения языка! Пожалуйста, попробуйте ещё раз, используя Английский или Русский.');
+            sendMessage($chat_id, 'Language detection error! Please try again using English or Russian. Ошибка определения языка! Пожалуйста, попробуй ещё раз, используя Английский или Русский.');
         }
             exit();
 }
