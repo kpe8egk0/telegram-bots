@@ -95,7 +95,7 @@ switch ($inputLangCode) {
         sendMessage('120380354', $serv_msg);
         $outputLangCode = 'error';
         addLookup($username, $message, $outputLangCode, $chat_id);
-        sendMessage($chat_id, 'Incorrect input language ('.$outputLangCode.')! Please, use English or Russian. Неверный язык ввода ('.$outputLangCode.')! Пожалуйста, используй Английский, или Русский.');
+        sendMessage($chat_id, 'Incorrect input language ('.$inputLangCode.')! Please, use English or Russian. Неверный язык ввода ('.$inputLangCode.')! Пожалуйста, используй Английский, или Русский.');
         exit();
 }
 
