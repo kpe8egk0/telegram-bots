@@ -97,11 +97,11 @@ switch ($inputLangCode) {
         addLookup($username, $message, $outputLangCode, $chat_id);
         if (!empty($inputLangCode))
         {
-            sendMessage($chat_id, 'Incorrect input language ' . strtoupper($inputLangCode) . '! Please, use English or Russian. Неверный язык ввода ' . strtoupper($inputLangCode) . '! Пожалуйста, используй Английский, или Русский.');
+            sendMessage($chat_id, 'Unsupported language ' . strtoupper($inputLangCode) . '! Please, use English or Russian. Неподдерживаемый язык ' . strtoupper($inputLangCode) . '! Пожалуйста, используй Английский, или Русский.');
         }
         else
         {
-            sendMessage($chat_id, 'Language detection error! Please try again. Ошибка определения языка! Пожалуйста, попробуйте ещё раз.');
+            sendMessage($chat_id, 'Language detection error! Please try again using English or Russian. Ошибка определения языка! Пожалуйста, попробуйте ещё раз, используя Английский или Русский.');
         }
             exit();
 }
