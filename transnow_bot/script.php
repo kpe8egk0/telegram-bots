@@ -95,8 +95,15 @@ switch ($inputLangCode) {
         sendMessage('120380354', $serv_msg);
         $outputLangCode = 'error';
         addLookup($username, $message, $outputLangCode, $chat_id);
-        sendMessage($chat_id, 'Incorrect input language ('.$inputLangCode.')! Please, use English or Russian. Неверный язык ввода ('.$inputLangCode.')! Пожалуйста, используй Английский, или Русский.');
-        exit();
+        if (!empty($inputLangCode))
+        {
+            sendMessage($chat_id, 'Incorrect input language ' . strtoupper($inputLangCode) . '! Please, use English or Russian. Неверный язык ввода ' . strtoupper($inputLangCode) . '! Пожалуйста, используй Английский, или Русский.');
+        }
+        else
+        {
+            sendMessage($chat_id, 'Language detection error! Please try again. Ошибка определения языка! Пожалуйста, попробуйте ещё раз.');
+        }
+            exit();
 }
 
 $output_json = getArticleFromSource('yandex_dict', $outputLangCode, $message, $yandex_dict_key);
