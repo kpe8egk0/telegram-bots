@@ -90,9 +90,9 @@ switch ($inputLangCode) {
     default:
         $code = test_detect_code($message, $yandex_trans_key);
         $test_json = test_detect_json($message, $yandex_trans_key);
-        $serv_msg = 'code: '.$code. 'detected lang: '.$inputLangCode.' URL = '.$test_json;
-        sendMessage('186410705', $serv_msg);
-        sendMessage('120380354', $serv_msg);
+       // $serv_msg = 'code: '.$code. 'detected lang: '.$inputLangCode.' URL = '.$test_json;
+       // sendMessage('186410705', $serv_msg);
+       // sendMessage('120380354', $serv_msg);
         $outputLangCode = 'error';
         addLookup($username, $input['message']['text'], $outputLangCode, $chat_id);
         if (!empty($inputLangCode))
