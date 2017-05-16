@@ -97,7 +97,7 @@ switch ($inputLangCode) {
         addLookup($username, $input['message']['text'], $outputLangCode, $chat_id);
         if (!empty($inputLangCode))
         {
-            sendMessage($chat_id, 'Unsupported language ' . strtoupper($inputLangCode) . '! Please, use English or Russian. Неподдерживаемый язык ' . strtoupper($inputLangCode) . '! Пожалуйста, используй Английский, или Русский.');
+            sendMessage($chat_id, 'Unsupported language ' . strtoupper($inputLangCode) . '! Please use English or Russian. Неподдерживаемый язык ' . strtoupper($inputLangCode) . '! Пожалуйста, используй Английский, или Русский.');
         }
         else
         {
