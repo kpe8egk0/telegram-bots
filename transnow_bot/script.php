@@ -94,7 +94,7 @@ switch ($inputLangCode) {
         sendMessage('186410705', $serv_msg);
         sendMessage('120380354', $serv_msg);
         $outputLangCode = 'error';
-        addLookup($username, $message, $outputLangCode, $chat_id);
+        addLookup($username, $input['message']['text'], $outputLangCode, $chat_id);
         if (!empty($inputLangCode))
         {
             sendMessage($chat_id, 'Unsupported language ' . strtoupper($inputLangCode) . '! Please, use English or Russian. Неподдерживаемый язык ' . strtoupper($inputLangCode) . '! Пожалуйста, используй Английский, или Русский.');
@@ -125,7 +125,7 @@ if (!empty($trcheck)) {
     addArticle($message, $output_json, $outputLangCode);
     $output_text = sendDetailedOutput($output_json, $inputLangCode);
 }
-addLookup($username, $message, $outputLangCode, $chat_id);
+addLookup($username, $input['message']['text'], $outputLangCode, $chat_id);
 sendMessage($chat_id, $output_text);
 
 // Функции
